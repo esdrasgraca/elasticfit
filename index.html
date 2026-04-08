@@ -20,9 +20,6 @@
   #setup-screen h1{font-family:'Bebas Neue',cursive;font-size:44px;letter-spacing:3px;color:var(--accent);margin-bottom:8px}
   #setup-screen p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:28px;max-width:340px}
   .setup-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;width:100%;max-width:380px}
-  .setup-card label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:8px;text-align:left}
-  .setup-card input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:8px}
-  .setup-card input:focus{border-color:var(--accent)}
   .setup-tip{font-size:12px;color:var(--muted);text-align:left;margin-bottom:16px;line-height:1.6;background:var(--surface2);border-radius:10px;padding:12px}
   .setup-tip strong{color:var(--text)}
 
@@ -39,7 +36,7 @@
   .sync-dot.error{background:var(--danger);animation:blink 1s infinite}
 
   .nav-tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:57px;z-index:99}
-  .nav-tab{flex:1;padding:12px 6px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase}
+  .nav-tab{flex:1;padding:11px 4px;text-align:center;font-size:10px;font-weight:600;letter-spacing:.4px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase}
   .nav-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 
   .page{display:none;padding:14px}
@@ -47,6 +44,7 @@
 
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
   .card-title{font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:1px;color:var(--accent);margin-bottom:14px}
+
   label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px}
   input[type=text],input[type=number],select,textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color .2s;-webkit-appearance:none}
   input:focus,select:focus,textarea:focus{border-color:var(--accent)}
@@ -80,12 +78,9 @@
   .btn-primary:active{transform:scale(.97);filter:brightness(.9)}
   .btn-primary:disabled{opacity:.5;cursor:not-allowed}
   .btn-danger{background:transparent;border:1px solid var(--danger);color:var(--danger);font-size:13px;font-family:'DM Sans',sans-serif;padding:7px 12px;border-radius:8px}
+  .btn-secondary{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:15px;font-family:'Bebas Neue',cursive;letter-spacing:1px}
   .btn-sm{width:auto;display:inline-block;padding:7px 14px;font-size:13px;border-radius:8px}
 
-  /* Dia de treino badge */
-  .dia-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.25);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:600;color:var(--accent)}
-
-  /* Separador de grupo na aba Hoje */
   .dia-group{margin-bottom:16px}
   .dia-group-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
   .dia-group-label{font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:1.5px;color:var(--accent)}
@@ -107,7 +102,6 @@
   .edot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
   .entry-actions{display:flex;gap:7px;margin-top:9px}
 
-  /* Progresso */
   .prog-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px;margin-bottom:11px}
   .prog-name{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
   .prog-dia{font-size:12px;color:var(--muted);margin-bottom:11px}
@@ -115,7 +109,7 @@
   .trend-up{background:rgba(200,255,0,.15);color:var(--accent)}
   .trend-same{background:rgba(122,122,140,.15);color:var(--muted)}
   .trend-down{background:rgba(255,71,87,.1);color:var(--danger)}
-  .h-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap}
+  .h-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
   .h-row:last-child{border-bottom:none}
   .h-date{color:var(--muted);font-size:11px;min-width:68px}
   .h-dia{font-size:11px;color:var(--accent);background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:5px;padding:1px 6px}
@@ -123,14 +117,23 @@
   .hdot{width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
   .h-vol{margin-left:auto;font-weight:600;font-size:12px;color:var(--accent)}
   .sec-hdr{font-family:'Bebas Neue',cursive;font-size:12px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-
-  /* Filtros progresso */
   .filter-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
   .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px}
   .sum-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px}
   .sum-num{font-family:'Bebas Neue',cursive;font-size:28px;color:var(--accent);line-height:1}
   .sum-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+  /* CONFIG */
+  .config-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
+  .config-item-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+  .config-item-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+  .url-display{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--muted);word-break:break-all;margin-bottom:10px;line-height:1.5}
+  .url-display span{color:var(--accent)}
+  .config-steps{font-size:12px;color:var(--muted);line-height:1.8;background:var(--surface2);border-radius:10px;padding:12px;margin-bottom:12px}
+  .config-steps strong{color:var(--text)}
+  .danger-zone{border-color:rgba(255,71,87,.3);background:rgba(255,71,87,.04)}
+  .danger-zone .config-item-title{color:var(--danger)}
 
   .empty{text-align:center;padding:44px 20px;color:var(--muted)}
   .empty-icon{font-size:38px;margin-bottom:10px}
@@ -158,11 +161,11 @@
 <!-- SETUP -->
 <div id="setup-screen">
   <h1>⚡ ElasticFit</h1>
-  <p>Cole abaixo a URL do seu Google Apps Script para salvar os treinos na sua planilha.</p>
+  <p>Cole a URL do seu Google Apps Script para conectar ao Google Sheets.</p>
   <div class="setup-card">
     <label>URL do Google Apps Script</label>
     <input type="text" id="api-url-input" placeholder="https://script.google.com/macros/s/...">
-    <div class="setup-tip">
+    <div class="setup-tip" style="margin-top:10px">
       <strong>Como obter a URL:</strong><br>
       1. Na planilha → Extensões → Apps Script<br>
       2. Cole o código do arquivo <strong>.gs</strong><br>
@@ -170,7 +173,7 @@
       4. Executar como: <strong>Eu</strong> · Acesso: <strong>Qualquer pessoa</strong><br>
       5. Copie a URL e cole aqui
     </div>
-    <button class="btn btn-primary" onclick="conectar()">CONECTAR</button>
+    <button class="btn btn-primary" onclick="conectar()" style="margin-top:4px">CONECTAR</button>
   </div>
 </div>
 
@@ -187,28 +190,26 @@
     </div>
   </header>
 
-  <div id="offline-bar">⚠️ Sem conexão com o Sheets. Verifique a URL do script.</div>
+  <div id="offline-bar">⚠️ Sem conexão com o Sheets. Vá em Config e atualize a URL.</div>
 
   <nav class="nav-tabs">
     <div class="nav-tab active" onclick="showPage('registrar')">📝 Registrar</div>
     <div class="nav-tab" onclick="showPage('hoje')">📅 Hoje</div>
     <div class="nav-tab" onclick="showPage('progresso')">📈 Progresso</div>
+    <div class="nav-tab" onclick="showPage('config')">⚙️ Config</div>
   </nav>
 
   <!-- REGISTRAR -->
   <div class="page active" id="page-registrar">
     <div class="card">
       <div class="card-title">Novo Exercício</div>
-
-      <!-- DIA DE TREINO -->
       <div class="form-row">
-        <label>Dia de Treino <span style="color:var(--muted);font-weight:400">(ex: Treino A, Pernas, Segunda)</span></label>
+        <label>Dia de Treino <span style="color:var(--muted);font-weight:400">(ex: Treino A, Pernas)</span></label>
         <div class="autocomplete-wrap">
           <input type="text" id="dia-treino" placeholder="Digite o nome do treino..." autocomplete="off" oninput="onDiaInput()" onfocus="onDiaInput()" onblur="setTimeout(fecharAuto,200)">
           <div class="autocomplete-list" id="auto-list"></div>
         </div>
       </div>
-
       <div class="form-row"><label>Nome do Exercício</label><input type="text" id="nome" placeholder="Ex: Rosca Bíceps..."></div>
       <div class="form-row"><label>Grupo Muscular</label>
         <select id="grupo">
@@ -223,7 +224,6 @@
         <div><label>Repetições</label><input type="number" id="reps" placeholder="12" min="1" max="200"></div>
       </div>
       <div class="form-row"><label>Data do Treino</label><input type="text" id="data-treino" placeholder="dd/mm/aaaa"></div>
-
       <div class="form-row">
         <label>Tipo de Elástico</label>
         <div class="type-toggle">
@@ -232,7 +232,6 @@
           <div class="type-btn" onclick="setTipo('ambos')" id="btn-ambos">🔀 Ambos</div>
         </div>
       </div>
-
       <div class="form-row">
         <label>Cores <span style="color:var(--muted);font-weight:400">(uma ou mais)</span></label>
         <div class="color-grid" id="color-grid">
@@ -247,7 +246,6 @@
         <div class="color-labels" id="color-labels"></div>
         <p class="info-tip">💡 Selecione várias cores para elásticos combinados</p>
       </div>
-
       <div class="form-row"><label>Observações</label><textarea id="obs" placeholder="Dificuldade, técnica, sensações..."></textarea></div>
       <button class="btn btn-primary" id="btn-salvar" onclick="salvarExercicio()">SALVAR NO GOOGLE SHEETS</button>
     </div>
@@ -272,17 +270,52 @@
     <div class="card" style="margin-bottom:11px">
       <div class="card-title">Histórico por Exercício</div>
       <div class="filter-row">
-        <div>
-          <label>Dia de Treino</label>
-          <select id="filtro-dia" onchange="renderProgresso()"><option value="">Todos</option></select>
-        </div>
-        <div>
-          <label>Exercício</label>
-          <select id="filtro-ex" onchange="renderProgresso()"><option value="">Todos</option></select>
-        </div>
+        <div><label>Dia de Treino</label><select id="filtro-dia" onchange="renderProgresso()"><option value="">Todos</option></select></div>
+        <div><label>Exercício</label><select id="filtro-ex" onchange="renderProgresso()"><option value="">Todos</option></select></div>
       </div>
     </div>
     <div id="lista-prog"></div>
+  </div>
+
+  <!-- CONFIG -->
+  <div class="page" id="page-config">
+
+    <div class="config-item">
+      <div class="config-item-title">🔗 URL do Google Apps Script</div>
+      <div class="config-item-desc">Cole aqui a URL gerada após cada nova implantação no Apps Script.</div>
+      <div class="url-display" id="url-display">Carregando...</div>
+      <div class="form-row" style="margin-bottom:10px">
+        <label>Nova URL</label>
+        <input type="text" id="nova-url" placeholder="https://script.google.com/macros/s/...">
+      </div>
+      <button class="btn btn-primary" onclick="salvarNovaUrl()" style="margin-bottom:8px">SALVAR NOVA URL</button>
+      <button class="btn btn-secondary" onclick="testarConexao()">TESTAR CONEXÃO</button>
+    </div>
+
+    <div class="config-item">
+      <div class="config-item-title">📋 Como reimplantar o Apps Script</div>
+      <div class="config-steps">
+        1. Abra o Apps Script da sua planilha<br>
+        2. Clique em <strong>Implantar → Gerenciar implantações</strong><br>
+        3. Clique no ✏️ (lápis) da implantação existente<br>
+        4. Em "Versão" selecione <strong>Nova versão</strong><br>
+        5. Clique em <strong>Implantar</strong><br>
+        6. Copie a URL gerada e cole no campo acima
+      </div>
+    </div>
+
+    <div class="config-item">
+      <div class="config-item-title">🔄 Sincronização</div>
+      <div class="config-item-desc">Force uma nova sincronização com o Google Sheets para atualizar os dados locais.</div>
+      <button class="btn btn-secondary" onclick="sincronizar();toast('🔄 Sincronizando...')">SINCRONIZAR AGORA</button>
+    </div>
+
+    <div class="config-item danger-zone">
+      <div class="config-item-title">⚠️ Desconectar</div>
+      <div class="config-item-desc">Remove a URL salva e volta para a tela inicial. Os dados na planilha não são apagados.</div>
+      <button class="btn btn-danger" style="width:100%;padding:12px;font-size:14px" onclick="desconectar()">DESCONECTAR DO SHEETS</button>
+    </div>
+
   </div>
 </div>
 
@@ -325,7 +358,7 @@ let cores = ['Amarelo'];
 let dataDia = new Date();
 let editId = null;
 let treinos = [];
-let diasConhecidos = []; // autocomplete
+let diasConhecidos = [];
 
 // ── INIT ──────────────────────────────────────────────────
 function init() {
@@ -350,7 +383,51 @@ function mostrarApp() {
   document.getElementById('app-screen').style.display = 'block';
   const c = localStorage.getItem(STORAGE_CACHE);
   if (c) try { treinos = JSON.parse(c); } catch(e) {}
+  atualizarUrlDisplay();
   sincronizar();
+}
+
+function atualizarUrlDisplay() {
+  const el = document.getElementById('url-display');
+  if (apiUrl) {
+    const curta = apiUrl.replace('https://script.google.com/macros/s/', '').substring(0, 30);
+    el.innerHTML = `<span>…${curta}…</span><br><span style="color:var(--muted);font-size:10px">script.google.com</span>`;
+  } else {
+    el.innerHTML = '<span style="color:var(--danger)">Nenhuma URL configurada</span>';
+  }
+}
+
+// ── CONFIG ────────────────────────────────────────────────
+function salvarNovaUrl() {
+  const nova = document.getElementById('nova-url').value.trim();
+  if (!nova) { toast('⚠️ Digite a nova URL', true); return; }
+  if (!nova.includes('script.google.com')) { toast('⚠️ URL inválida', true); return; }
+  apiUrl = nova;
+  localStorage.setItem(STORAGE_URL, nova);
+  document.getElementById('nova-url').value = '';
+  atualizarUrlDisplay();
+  document.getElementById('offline-bar').classList.remove('show');
+  toast('✅ URL atualizada! Sincronizando...');
+  sincronizar();
+}
+
+async function testarConexao() {
+  if (!apiUrl) { toast('⚠️ Nenhuma URL configurada', true); return; }
+  toast('🔄 Testando conexão...');
+  try {
+    await api('getAll');
+    toast('✅ Conexão funcionando!');
+  } catch(e) {
+    toast('❌ Falha na conexão. Verifique a URL.', true);
+  }
+}
+
+function desconectar() {
+  if (!confirm('Desconectar do Google Sheets? Os dados na planilha não serão apagados.')) return;
+  localStorage.removeItem(STORAGE_URL);
+  apiUrl = '';
+  document.getElementById('app-screen').style.display = 'none';
+  document.getElementById('setup-screen').style.display = 'flex';
 }
 
 // ── API ───────────────────────────────────────────────────
@@ -384,7 +461,6 @@ async function sincronizar() {
     const data = await api('getAll');
     treinos = data.treinos || [];
     localStorage.setItem(STORAGE_CACHE, JSON.stringify(treinos));
-    // Atualiza dias conhecidos a partir dos dados
     diasConhecidos = [...new Set(treinos.map(t => t.diaTreino).filter(Boolean))];
     localStorage.setItem(STORAGE_DIAS, JSON.stringify(diasConhecidos));
     updateFiltros();
@@ -395,12 +471,11 @@ async function sincronizar() {
   }
 }
 
-// ── AUTOCOMPLETE DIA ──────────────────────────────────────
+// ── AUTOCOMPLETE ──────────────────────────────────────────
 function getSugestoes(val) {
   if (!val) return diasConhecidos;
   return diasConhecidos.filter(d => d.toLowerCase().includes(val.toLowerCase()));
 }
-
 function renderAutoList(listId, inputId, sugestoes) {
   const list = document.getElementById(listId);
   if (!sugestoes.length) { list.classList.remove('open'); return; }
@@ -409,22 +484,11 @@ function renderAutoList(listId, inputId, sugestoes) {
   ).join('');
   list.classList.add('open');
 }
-
-function onDiaInput() {
-  const val = document.getElementById('dia-treino').value;
-  renderAutoList('auto-list', 'dia-treino', getSugestoes(val));
-}
-function onEditDiaInput() {
-  const val = document.getElementById('e-dia').value;
-  renderAutoList('auto-list-edit', 'e-dia', getSugestoes(val));
-}
-function selecionarDia(inputId, listId, val) {
-  document.getElementById(inputId).value = val;
-  document.getElementById(listId).classList.remove('open');
-}
+function onDiaInput() { renderAutoList('auto-list','dia-treino',getSugestoes(document.getElementById('dia-treino').value)); }
+function onEditDiaInput() { renderAutoList('auto-list-edit','e-dia',getSugestoes(document.getElementById('e-dia').value)); }
+function selecionarDia(inputId, listId, val) { document.getElementById(inputId).value=val; document.getElementById(listId).classList.remove('open'); }
 function fecharAuto() { document.getElementById('auto-list').classList.remove('open'); }
 function fecharAutoEdit() { document.getElementById('auto-list-edit').classList.remove('open'); }
-
 function adicionarDiaConhecido(dia) {
   if (dia && !diasConhecidos.includes(dia)) {
     diasConhecidos.push(dia);
@@ -443,24 +507,25 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  ['registrar','hoje','progresso'].forEach((p,i)=>{ if(p===id) document.querySelectorAll('.nav-tab')[i].classList.add('active'); });
+  ['registrar','hoje','progresso','config'].forEach((p,i)=>{ if(p===id) document.querySelectorAll('.nav-tab')[i].classList.add('active'); });
   if(id==='hoje') renderHoje();
   if(id==='progresso') renderProgresso();
+  if(id==='config') atualizarUrlDisplay();
 }
 
 // ── TIPO & COR ────────────────────────────────────────────
 function setTipo(t) {
-  tipo = t;
+  tipo=t;
   ['tubo','fita','ambos'].forEach(x=>document.getElementById('btn-'+x).classList.toggle('active',x===t));
 }
 function toggleCor(el) {
-  const c = el.dataset.cor, i = cores.indexOf(c);
-  if(i===-1){ cores.push(c); el.classList.add('selected'); }
-  else { if(cores.length===1){toast('⚠️ Mínimo uma cor',true);return;} cores.splice(i,1); el.classList.remove('selected'); }
+  const c=el.dataset.cor, i=cores.indexOf(c);
+  if(i===-1){cores.push(c);el.classList.add('selected');}
+  else{if(cores.length===1){toast('⚠️ Mínimo uma cor',true);return;}cores.splice(i,1);el.classList.remove('selected');}
   renderCorTags();
 }
 function renderCorTags() {
-  document.getElementById('color-labels').innerHTML = cores.map(c=>
+  document.getElementById('color-labels').innerHTML=cores.map(c=>
     `<span class="color-tag"><span class="color-tag-dot" style="background:${COR[c]}"></span>${c}</span>`
   ).join('');
 }
@@ -471,73 +536,58 @@ function initChips() {
 
 // ── SALVAR ────────────────────────────────────────────────
 async function salvarExercicio() {
-  const diaTreino = document.getElementById('dia-treino').value.trim();
-  const nome  = document.getElementById('nome').value.trim();
-  const grupo = document.getElementById('grupo').value;
-  const ser   = parseInt(document.getElementById('series').value);
-  const rep   = parseInt(document.getElementById('reps').value);
-  const data  = document.getElementById('data-treino').value.trim();
-  const obs   = document.getElementById('obs').value.trim();
+  const diaTreino=document.getElementById('dia-treino').value.trim();
+  const nome=document.getElementById('nome').value.trim();
+  const grupo=document.getElementById('grupo').value;
+  const ser=parseInt(document.getElementById('series').value);
+  const rep=parseInt(document.getElementById('reps').value);
+  const data=document.getElementById('data-treino').value.trim();
+  const obs=document.getElementById('obs').value.trim();
 
   if(!diaTreino){toast('⚠️ Informe o dia de treino',true);return;}
-  if(!nome)     {toast('⚠️ Informe o nome do exercício',true);return;}
-  if(!ser)      {toast('⚠️ Informe as séries',true);return;}
-  if(!rep)      {toast('⚠️ Informe as repetições',true);return;}
+  if(!nome){toast('⚠️ Informe o nome do exercício',true);return;}
+  if(!ser){toast('⚠️ Informe as séries',true);return;}
+  if(!rep){toast('⚠️ Informe as repetições',true);return;}
   if(!/^\d{2}\/\d{2}\/\d{4}$/.test(data)){toast('⚠️ Data inválida (dd/mm/aaaa)',true);return;}
 
-  const t = {
-    id: Date.now().toString(), nome, grupo, series:ser, reps:rep,
-    data, tipo, cores:[...cores], obs, criadoEm:new Date().toISOString(),
-    diaTreino
-  };
-
-  const btn = document.getElementById('btn-salvar');
-  btn.disabled=true; btn.textContent='SALVANDO…';
+  const t={id:Date.now().toString(),nome,grupo,series:ser,reps:rep,data,tipo,cores:[...cores],obs,criadoEm:new Date().toISOString(),diaTreino};
+  const btn=document.getElementById('btn-salvar');
+  btn.disabled=true;btn.textContent='SALVANDO…';
 
   try {
-    await api('save', t);
+    await api('save',t);
     treinos.push(t);
-    localStorage.setItem(STORAGE_CACHE, JSON.stringify(treinos));
+    localStorage.setItem(STORAGE_CACHE,JSON.stringify(treinos));
     adicionarDiaConhecido(diaTreino);
     ['nome','grupo','series','reps','obs'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('data-treino').value = hojeFmt();
-    // mantém o dia de treino preenchido para facilitar cadastro em sequência
+    document.getElementById('data-treino').value=hojeFmt();
     toast('✅ Salvo no Google Sheets!');
     updateFiltros();
-  } catch(e) { toast('⚠️ Erro ao salvar. Tente novamente.',true); }
+  } catch(e){toast('⚠️ Erro ao salvar.',true);}
 
-  btn.disabled=false; btn.textContent='SALVAR NO GOOGLE SHEETS';
+  btn.disabled=false;btn.textContent='SALVAR NO GOOGLE SHEETS';
 }
 
 // ── HOJE ──────────────────────────────────────────────────
-function mudarDia(d) { dataDia=new Date(dataDia); dataDia.setDate(dataDia.getDate()+d); renderHoje(); }
+function mudarDia(d){dataDia=new Date(dataDia);dataDia.setDate(dataDia.getDate()+d);renderHoje();}
 
 function renderHoje() {
-  document.getElementById('label-dia').textContent = fmtDate(dataDia).toUpperCase();
-  const dStr = fmtShort(dataDia);
-  const lista = treinos.filter(t=>t.data===dStr);
-  const el = document.getElementById('lista-hoje');
-  const sg = document.getElementById('sum-grid');
-
-  if(!lista.length) {
+  document.getElementById('label-dia').textContent=fmtDate(dataDia).toUpperCase();
+  const dStr=fmtShort(dataDia);
+  const lista=treinos.filter(t=>t.data===dStr);
+  const el=document.getElementById('lista-hoje');
+  const sg=document.getElementById('sum-grid');
+  if(!lista.length){
     sg.style.display='none';
     el.innerHTML=`<div class="empty"><div class="empty-icon">🏋️</div><h3>Nenhum treino neste dia</h3><p>Use a aba Registrar para adicionar</p></div>`;
     return;
   }
-
   sg.style.display='grid';
-  document.getElementById('s-ex').textContent = lista.length;
-  document.getElementById('s-sr').textContent = lista.reduce((a,t)=>a+(+t.series||0),0);
-
-  // Agrupa por diaTreino
-  const grupos = {};
-  lista.forEach(t => {
-    const k = t.diaTreino || '—';
-    if(!grupos[k]) grupos[k] = [];
-    grupos[k].push(t);
-  });
-
-  el.innerHTML = Object.entries(grupos).map(([dia, items]) => `
+  document.getElementById('s-ex').textContent=lista.length;
+  document.getElementById('s-sr').textContent=lista.reduce((a,t)=>a+(+t.series||0),0);
+  const grupos={};
+  lista.forEach(t=>{const k=t.diaTreino||'—';if(!grupos[k])grupos[k]=[];grupos[k].push(t);});
+  el.innerHTML=Object.entries(grupos).map(([dia,items])=>`
     <div class="dia-group">
       <div class="dia-group-header">
         <div class="dia-group-label">${dia}</div>
@@ -550,8 +600,8 @@ function renderHoje() {
 }
 
 function entryHTML(t) {
-  const tl = t.tipo==='tubo'?'🔵 Tubo':t.tipo==='fita'?'📏 Fita':'🔀 Ambos';
-  const dots = (t.cores||[]).map(c=>`<div class="edot" style="background:${COR[c]||'#888'}"></div>`).join('');
+  const tl=t.tipo==='tubo'?'🔵 Tubo':t.tipo==='fita'?'📏 Fita':'🔀 Ambos';
+  const dots=(t.cores||[]).map(c=>`<div class="edot" style="background:${COR[c]||'#888'}"></div>`).join('');
   return `<div class="log-entry">
     <div class="entry-name">${t.nome}</div>
     <div class="entry-meta">
@@ -570,48 +620,41 @@ function entryHTML(t) {
 
 // ── PROGRESSO ─────────────────────────────────────────────
 function updateFiltros() {
-  const dias  = [...new Set(treinos.map(t=>t.diaTreino).filter(Boolean))].sort();
-  const nomes = [...new Set(treinos.map(t=>t.nome))].sort();
-
-  const sd = document.getElementById('filtro-dia');
-  const se = document.getElementById('filtro-ex');
-  const cd = sd.value, ce = se.value;
-
-  sd.innerHTML = '<option value="">Todos</option>' + dias.map(d=>`<option value="${d}"${d===cd?' selected':''}>${d}</option>`).join('');
-  se.innerHTML = '<option value="">Todos</option>' + nomes.map(n=>`<option value="${n}"${n===ce?' selected':''}>${n}</option>`).join('');
+  const dias=[...new Set(treinos.map(t=>t.diaTreino).filter(Boolean))].sort();
+  const nomes=[...new Set(treinos.map(t=>t.nome))].sort();
+  const sd=document.getElementById('filtro-dia'),se=document.getElementById('filtro-ex');
+  const cd=sd.value,ce=se.value;
+  sd.innerHTML='<option value="">Todos</option>'+dias.map(d=>`<option value="${d}"${d===cd?' selected':''}>${d}</option>`).join('');
+  se.innerHTML='<option value="">Todos</option>'+nomes.map(n=>`<option value="${n}"${n===ce?' selected':''}>${n}</option>`).join('');
 }
 
 function renderProgresso() {
   updateFiltros();
-  const fDia = document.getElementById('filtro-dia').value;
-  const fEx  = document.getElementById('filtro-ex').value;
-  let lista = [...treinos];
-  if(fDia) lista = lista.filter(t=>t.diaTreino===fDia);
-  if(fEx)  lista = lista.filter(t=>t.nome===fEx);
+  const fDia=document.getElementById('filtro-dia').value;
+  const fEx=document.getElementById('filtro-ex').value;
+  let lista=[...treinos];
+  if(fDia) lista=lista.filter(t=>t.diaTreino===fDia);
+  if(fEx) lista=lista.filter(t=>t.nome===fEx);
   lista.sort((a,b)=>parseDate(a.data)-parseDate(b.data));
 
-  if(!lista.length) {
+  if(!lista.length){
     document.getElementById('lista-prog').innerHTML=`<div class="empty"><div class="empty-icon">📊</div><h3>Nenhum dado ainda</h3><p>Registre treinos para ver o progresso</p></div>`;
     return;
   }
 
-  // Agrupa por exercício
-  const byEx = {};
-  lista.forEach(t=>{ const k=t.nome; if(!byEx[k]) byEx[k]=[]; byEx[k].push(t); });
-
+  const byEx={};
+  lista.forEach(t=>{if(!byEx[t.nome])byEx[t.nome]=[];byEx[t.nome].push(t);});
   let html='';
-  for(const [nome,logs] of Object.entries(byEx)) {
+  for(const [nome,logs] of Object.entries(byEx)){
     const sorted=[...logs].sort((a,b)=>parseDate(a.data)-parseDate(b.data));
-    const last=sorted[sorted.length-1], prev=sorted[sorted.length-2];
-    const diasDoEx = [...new Set(sorted.map(t=>t.diaTreino).filter(Boolean))];
-
+    const last=sorted[sorted.length-1],prev=sorted[sorted.length-2];
+    const diasDoEx=[...new Set(sorted.map(t=>t.diaTreino).filter(Boolean))];
     let trend='';
     if(prev){
       const cl=(+last.series)*(+last.reps)*(last.cores||[]).length;
       const pl=(+prev.series)*(+prev.reps)*(prev.cores||[]).length;
-      trend = cl>pl?'<span class="trend trend-up">▲ Progresso</span>':cl===pl?'<span class="trend trend-same">= Manteve</span>':'<span class="trend trend-down">▼ Reduziu</span>';
+      trend=cl>pl?'<span class="trend trend-up">▲ Progresso</span>':cl===pl?'<span class="trend trend-same">= Manteve</span>':'<span class="trend trend-down">▼ Reduziu</span>';
     }
-
     html+=`<div class="prog-card">
       <div class="prog-name">${nome}${trend}</div>
       ${diasDoEx.length?`<div class="prog-dia">📋 ${diasDoEx.join(' · ')}</div>`:''}
@@ -634,54 +677,48 @@ function renderProgresso() {
 }
 
 // ── EDITAR / EXCLUIR ──────────────────────────────────────
-function abrirModal(id) {
+function abrirModal(id){
   editId=id;
-  const t=treinos.find(x=>x.id===id); if(!t) return;
+  const t=treinos.find(x=>x.id===id);if(!t)return;
   document.getElementById('e-dia').value=t.diaTreino||'';
   document.getElementById('e-series').value=t.series;
   document.getElementById('e-reps').value=t.reps;
   document.getElementById('e-obs').value=t.obs||'';
   document.getElementById('modal-edit').classList.add('open');
 }
-function fecharModal() { document.getElementById('modal-edit').classList.remove('open'); editId=null; }
+function fecharModal(){document.getElementById('modal-edit').classList.remove('open');editId=null;}
 
-async function salvarEdicao() {
+async function salvarEdicao(){
   const btn=document.getElementById('btn-edit-save');
   btn.disabled=true;
-  const payload={
-    id:editId,
-    diaTreino:document.getElementById('e-dia').value.trim(),
-    series:parseInt(document.getElementById('e-series').value),
-    reps:parseInt(document.getElementById('e-reps').value),
-    obs:document.getElementById('e-obs').value.trim()
-  };
-  try {
+  const payload={id:editId,diaTreino:document.getElementById('e-dia').value.trim(),series:parseInt(document.getElementById('e-series').value),reps:parseInt(document.getElementById('e-reps').value),obs:document.getElementById('e-obs').value.trim()};
+  try{
     await api('update',payload);
     const i=treinos.findIndex(x=>x.id===editId);
-    if(i!==-1) Object.assign(treinos[i],payload);
+    if(i!==-1)Object.assign(treinos[i],payload);
     localStorage.setItem(STORAGE_CACHE,JSON.stringify(treinos));
     adicionarDiaConhecido(payload.diaTreino);
-    fecharModal(); renderHoje(); updateFiltros(); toast('✅ Editado!');
-  } catch(e){toast('⚠️ Erro ao editar',true);}
+    fecharModal();renderHoje();updateFiltros();toast('✅ Editado!');
+  }catch(e){toast('⚠️ Erro ao editar',true);}
   btn.disabled=false;
 }
 
-async function deletar(id) {
-  if(!confirm('Excluir este exercício?')) return;
-  try {
+async function deletar(id){
+  if(!confirm('Excluir este exercício?'))return;
+  try{
     await api('delete',{id});
     treinos=treinos.filter(t=>t.id!==id);
     localStorage.setItem(STORAGE_CACHE,JSON.stringify(treinos));
-    renderHoje(); renderProgresso(); toast('🗑 Excluído');
-  } catch(e){toast('⚠️ Erro ao excluir',true);}
+    renderHoje();renderProgresso();toast('🗑 Excluído');
+  }catch(e){toast('⚠️ Erro ao excluir',true);}
 }
 
 // ── TOAST ─────────────────────────────────────────────────
 let tTimer;
 function toast(msg,err=false){
   const el=document.getElementById('toast');
-  el.textContent=msg; el.className=err?'err show':'show';
-  clearTimeout(tTimer); tTimer=setTimeout(()=>el.classList.remove('show'),2500);
+  el.textContent=msg;el.className=err?'err show':'show';
+  clearTimeout(tTimer);tTimer=setTimeout(()=>el.classList.remove('show'),2500);
 }
 
 document.getElementById('modal-edit').addEventListener('click',function(e){if(e.target===this)fecharModal();});
