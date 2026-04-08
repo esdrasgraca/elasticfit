@@ -31,7 +31,7 @@
   header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
   header h1{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:2px;color:var(--accent)}
   header p{font-size:11px;color:var(--muted);margin-top:2px}
-  .sync-pill{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 10px}
+  .sync-pill{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;cursor:pointer}
   .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -39,7 +39,7 @@
   .sync-dot.error{background:var(--danger);animation:blink 1s infinite}
 
   .nav-tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:57px;z-index:99}
-  .nav-tab{flex:1;padding:12px 8px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase}
+  .nav-tab{flex:1;padding:12px 6px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase}
   .nav-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 
   .page{display:none;padding:14px}
@@ -54,6 +54,14 @@
   textarea{resize:none;height:68px}
   .form-row{margin-bottom:13px}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+  /* Autocomplete */
+  .autocomplete-wrap{position:relative}
+  .autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin-top:4px;z-index:50;overflow:hidden;display:none}
+  .autocomplete-list.open{display:block}
+  .autocomplete-item{padding:10px 14px;font-size:14px;cursor:pointer;color:var(--text);border-bottom:1px solid var(--border)}
+  .autocomplete-item:last-child{border-bottom:none}
+  .autocomplete-item:active{background:var(--border)}
 
   .type-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
   .type-btn{flex:1;padding:10px 6px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
@@ -74,6 +82,16 @@
   .btn-danger{background:transparent;border:1px solid var(--danger);color:var(--danger);font-size:13px;font-family:'DM Sans',sans-serif;padding:7px 12px;border-radius:8px}
   .btn-sm{width:auto;display:inline-block;padding:7px 14px;font-size:13px;border-radius:8px}
 
+  /* Dia de treino badge */
+  .dia-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.25);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:600;color:var(--accent)}
+
+  /* Separador de grupo na aba Hoje */
+  .dia-group{margin-bottom:16px}
+  .dia-group-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .dia-group-label{font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:1.5px;color:var(--accent)}
+  .dia-group-count{font-size:12px;color:var(--muted)}
+  .dia-group-line{flex:1;height:1px;background:var(--border)}
+
   .date-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
   .date-arrow{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:var(--text)}
   .date-label{font-family:'Bebas Neue',cursive;font-size:19px;letter-spacing:1px}
@@ -89,19 +107,25 @@
   .edot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
   .entry-actions{display:flex;gap:7px;margin-top:9px}
 
+  /* Progresso */
   .prog-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px;margin-bottom:11px}
-  .prog-name{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px;margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  .prog-name{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  .prog-dia{font-size:12px;color:var(--muted);margin-bottom:11px}
   .trend{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;padding:3px 8px;border-radius:20px}
   .trend-up{background:rgba(200,255,0,.15);color:var(--accent)}
   .trend-same{background:rgba(122,122,140,.15);color:var(--muted)}
   .trend-down{background:rgba(255,71,87,.1);color:var(--danger)}
-  .h-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+  .h-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap}
   .h-row:last-child{border-bottom:none}
   .h-date{color:var(--muted);font-size:11px;min-width:68px}
+  .h-dia{font-size:11px;color:var(--accent);background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:5px;padding:1px 6px}
   .h-dots{display:flex;gap:3px}
   .hdot{width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
   .h-vol{margin-left:auto;font-weight:600;font-size:12px;color:var(--accent)}
   .sec-hdr{font-family:'Bebas Neue',cursive;font-size:12px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+
+  /* Filtros progresso */
+  .filter-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
   .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px}
   .sum-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px}
@@ -115,7 +139,7 @@
 
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;align-items:flex-end}
   .modal-overlay.open{display:flex}
-  .modal{background:var(--surface);border-radius:20px 20px 0 0;padding:20px;width:100%;max-height:80vh;overflow-y:auto;animation:slideUp .25s ease-out}
+  .modal{background:var(--surface);border-radius:20px 20px 0 0;padding:20px;width:100%;max-height:85vh;overflow-y:auto;animation:slideUp .25s ease-out}
   @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
   .modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
   .modal-title{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:1px}
@@ -157,7 +181,7 @@
       <h1>⚡ ElasticFit</h1>
       <p>Controle de Treino com Elásticos</p>
     </div>
-    <div class="sync-pill">
+    <div class="sync-pill" onclick="sincronizar()" title="Toque para sincronizar">
       <div class="sync-dot" id="sync-dot"></div>
       <span id="sync-lbl">Sheets</span>
     </div>
@@ -175,6 +199,16 @@
   <div class="page active" id="page-registrar">
     <div class="card">
       <div class="card-title">Novo Exercício</div>
+
+      <!-- DIA DE TREINO -->
+      <div class="form-row">
+        <label>Dia de Treino <span style="color:var(--muted);font-weight:400">(ex: Treino A, Pernas, Segunda)</span></label>
+        <div class="autocomplete-wrap">
+          <input type="text" id="dia-treino" placeholder="Digite o nome do treino..." autocomplete="off" oninput="onDiaInput()" onfocus="onDiaInput()" onblur="setTimeout(fecharAuto,200)">
+          <div class="autocomplete-list" id="auto-list"></div>
+        </div>
+      </div>
+
       <div class="form-row"><label>Nome do Exercício</label><input type="text" id="nome" placeholder="Ex: Rosca Bíceps..."></div>
       <div class="form-row"><label>Grupo Muscular</label>
         <select id="grupo">
@@ -189,6 +223,7 @@
         <div><label>Repetições</label><input type="number" id="reps" placeholder="12" min="1" max="200"></div>
       </div>
       <div class="form-row"><label>Data do Treino</label><input type="text" id="data-treino" placeholder="dd/mm/aaaa"></div>
+
       <div class="form-row">
         <label>Tipo de Elástico</label>
         <div class="type-toggle">
@@ -197,8 +232,9 @@
           <div class="type-btn" onclick="setTipo('ambos')" id="btn-ambos">🔀 Ambos</div>
         </div>
       </div>
+
       <div class="form-row">
-        <label>Cores <span style="color:var(--muted);font-weight:400">(selecione uma ou mais)</span></label>
+        <label>Cores <span style="color:var(--muted);font-weight:400">(uma ou mais)</span></label>
         <div class="color-grid" id="color-grid">
           <div class="color-chip selected" style="background:var(--c-amarelo)" data-cor="Amarelo" onclick="toggleCor(this)"></div>
           <div class="color-chip" style="background:var(--c-verde)" data-cor="Verde" onclick="toggleCor(this)"></div>
@@ -211,6 +247,7 @@
         <div class="color-labels" id="color-labels"></div>
         <p class="info-tip">💡 Selecione várias cores para elásticos combinados</p>
       </div>
+
       <div class="form-row"><label>Observações</label><textarea id="obs" placeholder="Dificuldade, técnica, sensações..."></textarea></div>
       <button class="btn btn-primary" id="btn-salvar" onclick="salvarExercicio()">SALVAR NO GOOGLE SHEETS</button>
     </div>
@@ -234,7 +271,16 @@
   <div class="page" id="page-progresso">
     <div class="card" style="margin-bottom:11px">
       <div class="card-title">Histórico por Exercício</div>
-      <select id="filtro-ex" onchange="renderProgresso()"><option value="">Todos os exercícios</option></select>
+      <div class="filter-row">
+        <div>
+          <label>Dia de Treino</label>
+          <select id="filtro-dia" onchange="renderProgresso()"><option value="">Todos</option></select>
+        </div>
+        <div>
+          <label>Exercício</label>
+          <select id="filtro-ex" onchange="renderProgresso()"><option value="">Todos</option></select>
+        </div>
+      </div>
     </div>
     <div id="lista-prog"></div>
   </div>
@@ -246,6 +292,13 @@
     <div class="modal-hdr">
       <div class="modal-title">Editar Exercício</div>
       <button class="modal-close" onclick="fecharModal()">✕</button>
+    </div>
+    <div class="form-row">
+      <label>Dia de Treino</label>
+      <div class="autocomplete-wrap">
+        <input type="text" id="e-dia" autocomplete="off" oninput="onEditDiaInput()" onfocus="onEditDiaInput()" onblur="setTimeout(fecharAutoEdit,200)">
+        <div class="autocomplete-list" id="auto-list-edit"></div>
+      </div>
     </div>
     <div class="form-row"><label>Séries</label><input type="number" id="e-series"></div>
     <div class="form-row"><label>Repetições</label><input type="number" id="e-reps"></div>
@@ -259,6 +312,7 @@
 <script>
 const STORAGE_URL   = 'ef_api_url';
 const STORAGE_CACHE = 'ef_cache';
+const STORAGE_DIAS  = 'ef_dias';
 
 const COR = {
   Amarelo:'var(--c-amarelo)',Verde:'var(--c-verde)',Vermelho:'var(--c-vermelho)',
@@ -271,6 +325,7 @@ let cores = ['Amarelo'];
 let dataDia = new Date();
 let editId = null;
 let treinos = [];
+let diasConhecidos = []; // autocomplete
 
 // ── INIT ──────────────────────────────────────────────────
 function init() {
@@ -278,6 +333,8 @@ function init() {
   document.getElementById('data-treino').value = hojeFmt();
   initChips();
   document.getElementById('label-dia').textContent = fmtDate(dataDia).toUpperCase();
+  const dc = localStorage.getItem(STORAGE_DIAS);
+  if (dc) try { diasConhecidos = JSON.parse(dc); } catch(e) {}
 }
 
 function conectar() {
@@ -296,7 +353,7 @@ function mostrarApp() {
   sincronizar();
 }
 
-// ── API (GET puro, sem CORS) ──────────────────────────────
+// ── API ───────────────────────────────────────────────────
 function setSync(s) {
   const dot = document.getElementById('sync-dot');
   const lbl = document.getElementById('sync-lbl');
@@ -327,11 +384,51 @@ async function sincronizar() {
     const data = await api('getAll');
     treinos = data.treinos || [];
     localStorage.setItem(STORAGE_CACHE, JSON.stringify(treinos));
-    updateFiltro();
+    // Atualiza dias conhecidos a partir dos dados
+    diasConhecidos = [...new Set(treinos.map(t => t.diaTreino).filter(Boolean))];
+    localStorage.setItem(STORAGE_DIAS, JSON.stringify(diasConhecidos));
+    updateFiltros();
     renderHoje();
   } catch(e) {
-    updateFiltro();
+    updateFiltros();
     renderHoje();
+  }
+}
+
+// ── AUTOCOMPLETE DIA ──────────────────────────────────────
+function getSugestoes(val) {
+  if (!val) return diasConhecidos;
+  return diasConhecidos.filter(d => d.toLowerCase().includes(val.toLowerCase()));
+}
+
+function renderAutoList(listId, inputId, sugestoes) {
+  const list = document.getElementById(listId);
+  if (!sugestoes.length) { list.classList.remove('open'); return; }
+  list.innerHTML = sugestoes.map(d =>
+    `<div class="autocomplete-item" onmousedown="selecionarDia('${inputId}','${listId}','${d}')">${d}</div>`
+  ).join('');
+  list.classList.add('open');
+}
+
+function onDiaInput() {
+  const val = document.getElementById('dia-treino').value;
+  renderAutoList('auto-list', 'dia-treino', getSugestoes(val));
+}
+function onEditDiaInput() {
+  const val = document.getElementById('e-dia').value;
+  renderAutoList('auto-list-edit', 'e-dia', getSugestoes(val));
+}
+function selecionarDia(inputId, listId, val) {
+  document.getElementById(inputId).value = val;
+  document.getElementById(listId).classList.remove('open');
+}
+function fecharAuto() { document.getElementById('auto-list').classList.remove('open'); }
+function fecharAutoEdit() { document.getElementById('auto-list-edit').classList.remove('open'); }
+
+function adicionarDiaConhecido(dia) {
+  if (dia && !diasConhecidos.includes(dia)) {
+    diasConhecidos.push(dia);
+    localStorage.setItem(STORAGE_DIAS, JSON.stringify(diasConhecidos));
   }
 }
 
@@ -374,6 +471,7 @@ function initChips() {
 
 // ── SALVAR ────────────────────────────────────────────────
 async function salvarExercicio() {
+  const diaTreino = document.getElementById('dia-treino').value.trim();
   const nome  = document.getElementById('nome').value.trim();
   const grupo = document.getElementById('grupo').value;
   const ser   = parseInt(document.getElementById('series').value);
@@ -381,12 +479,17 @@ async function salvarExercicio() {
   const data  = document.getElementById('data-treino').value.trim();
   const obs   = document.getElementById('obs').value.trim();
 
-  if(!nome)  {toast('⚠️ Informe o nome',true);return;}
-  if(!ser)   {toast('⚠️ Informe as séries',true);return;}
-  if(!rep)   {toast('⚠️ Informe as repetições',true);return;}
+  if(!diaTreino){toast('⚠️ Informe o dia de treino',true);return;}
+  if(!nome)     {toast('⚠️ Informe o nome do exercício',true);return;}
+  if(!ser)      {toast('⚠️ Informe as séries',true);return;}
+  if(!rep)      {toast('⚠️ Informe as repetições',true);return;}
   if(!/^\d{2}\/\d{2}\/\d{4}$/.test(data)){toast('⚠️ Data inválida (dd/mm/aaaa)',true);return;}
 
-  const t = { id:Date.now().toString(), nome, grupo, series:ser, reps:rep, data, tipo, cores:[...cores], obs, criadoEm:new Date().toISOString() };
+  const t = {
+    id: Date.now().toString(), nome, grupo, series:ser, reps:rep,
+    data, tipo, cores:[...cores], obs, criadoEm:new Date().toISOString(),
+    diaTreino
+  };
 
   const btn = document.getElementById('btn-salvar');
   btn.disabled=true; btn.textContent='SALVANDO…';
@@ -395,10 +498,12 @@ async function salvarExercicio() {
     await api('save', t);
     treinos.push(t);
     localStorage.setItem(STORAGE_CACHE, JSON.stringify(treinos));
+    adicionarDiaConhecido(diaTreino);
     ['nome','grupo','series','reps','obs'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('data-treino').value = hojeFmt();
+    // mantém o dia de treino preenchido para facilitar cadastro em sequência
     toast('✅ Salvo no Google Sheets!');
-    updateFiltro();
+    updateFiltros();
   } catch(e) { toast('⚠️ Erro ao salvar. Tente novamente.',true); }
 
   btn.disabled=false; btn.textContent='SALVAR NO GOOGLE SHEETS';
@@ -413,15 +518,35 @@ function renderHoje() {
   const lista = treinos.filter(t=>t.data===dStr);
   const el = document.getElementById('lista-hoje');
   const sg = document.getElementById('sum-grid');
+
   if(!lista.length) {
     sg.style.display='none';
     el.innerHTML=`<div class="empty"><div class="empty-icon">🏋️</div><h3>Nenhum treino neste dia</h3><p>Use a aba Registrar para adicionar</p></div>`;
     return;
   }
+
   sg.style.display='grid';
   document.getElementById('s-ex').textContent = lista.length;
   document.getElementById('s-sr').textContent = lista.reduce((a,t)=>a+(+t.series||0),0);
-  el.innerHTML = lista.map(entryHTML).join('');
+
+  // Agrupa por diaTreino
+  const grupos = {};
+  lista.forEach(t => {
+    const k = t.diaTreino || '—';
+    if(!grupos[k]) grupos[k] = [];
+    grupos[k].push(t);
+  });
+
+  el.innerHTML = Object.entries(grupos).map(([dia, items]) => `
+    <div class="dia-group">
+      <div class="dia-group-header">
+        <div class="dia-group-label">${dia}</div>
+        <div class="dia-group-count">${items.length} exercício${items.length>1?'s':''}</div>
+        <div class="dia-group-line"></div>
+      </div>
+      ${items.map(entryHTML).join('')}
+    </div>
+  `).join('');
 }
 
 function entryHTML(t) {
@@ -444,45 +569,60 @@ function entryHTML(t) {
 }
 
 // ── PROGRESSO ─────────────────────────────────────────────
-function updateFiltro() {
+function updateFiltros() {
+  const dias  = [...new Set(treinos.map(t=>t.diaTreino).filter(Boolean))].sort();
   const nomes = [...new Set(treinos.map(t=>t.nome))].sort();
-  const sel = document.getElementById('filtro-ex');
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">Todos os exercícios</option>' +
-    nomes.map(n=>`<option value="${n}"${n===cur?' selected':''}>${n}</option>`).join('');
+
+  const sd = document.getElementById('filtro-dia');
+  const se = document.getElementById('filtro-ex');
+  const cd = sd.value, ce = se.value;
+
+  sd.innerHTML = '<option value="">Todos</option>' + dias.map(d=>`<option value="${d}"${d===cd?' selected':''}>${d}</option>`).join('');
+  se.innerHTML = '<option value="">Todos</option>' + nomes.map(n=>`<option value="${n}"${n===ce?' selected':''}>${n}</option>`).join('');
 }
 
 function renderProgresso() {
-  updateFiltro();
-  const filtro = document.getElementById('filtro-ex').value;
-  let lista = filtro ? treinos.filter(t=>t.nome===filtro) : [...treinos];
+  updateFiltros();
+  const fDia = document.getElementById('filtro-dia').value;
+  const fEx  = document.getElementById('filtro-ex').value;
+  let lista = [...treinos];
+  if(fDia) lista = lista.filter(t=>t.diaTreino===fDia);
+  if(fEx)  lista = lista.filter(t=>t.nome===fEx);
   lista.sort((a,b)=>parseDate(a.data)-parseDate(b.data));
+
   if(!lista.length) {
     document.getElementById('lista-prog').innerHTML=`<div class="empty"><div class="empty-icon">📊</div><h3>Nenhum dado ainda</h3><p>Registre treinos para ver o progresso</p></div>`;
     return;
   }
+
+  // Agrupa por exercício
   const byEx = {};
-  lista.forEach(t=>{ if(!byEx[t.nome]) byEx[t.nome]=[]; byEx[t.nome].push(t); });
+  lista.forEach(t=>{ const k=t.nome; if(!byEx[k]) byEx[k]=[]; byEx[k].push(t); });
+
   let html='';
   for(const [nome,logs] of Object.entries(byEx)) {
     const sorted=[...logs].sort((a,b)=>parseDate(a.data)-parseDate(b.data));
     const last=sorted[sorted.length-1], prev=sorted[sorted.length-2];
+    const diasDoEx = [...new Set(sorted.map(t=>t.diaTreino).filter(Boolean))];
+
     let trend='';
     if(prev){
       const cl=(+last.series)*(+last.reps)*(last.cores||[]).length;
       const pl=(+prev.series)*(+prev.reps)*(prev.cores||[]).length;
       trend = cl>pl?'<span class="trend trend-up">▲ Progresso</span>':cl===pl?'<span class="trend trend-same">= Manteve</span>':'<span class="trend trend-down">▼ Reduziu</span>';
     }
+
     html+=`<div class="prog-card">
       <div class="prog-name">${nome}${trend}</div>
+      ${diasDoEx.length?`<div class="prog-dia">📋 ${diasDoEx.join(' · ')}</div>`:''}
       <div class="sec-hdr">Histórico de cargas</div>
       ${sorted.slice().reverse().slice(0,10).map(t=>{
         const dots=(t.cores||[]).map(c=>`<div class="hdot" style="background:${COR[c]||'#888'}"></div>`).join('');
         const vol=(+t.series)*(+t.reps)*(t.cores||[]).length;
         return `<div class="h-row">
           <span class="h-date">${t.data}</span>
+          ${t.diaTreino?`<span class="h-dia">${t.diaTreino}</span>`:''}
           <span class="badge">${t.series}x${t.reps}</span>
-          <span style="font-size:11px;color:var(--muted)">${t.tipo==='tubo'?'Tubo':t.tipo==='fita'?'Fita':'Ambos'}</span>
           <div class="h-dots">${dots}</div>
           <span style="font-size:11px;color:var(--muted)">${(t.cores||[]).join('+')||'-'}</span>
           <span class="h-vol">Vol:${vol}</span>
@@ -497,6 +637,7 @@ function renderProgresso() {
 function abrirModal(id) {
   editId=id;
   const t=treinos.find(x=>x.id===id); if(!t) return;
+  document.getElementById('e-dia').value=t.diaTreino||'';
   document.getElementById('e-series').value=t.series;
   document.getElementById('e-reps').value=t.reps;
   document.getElementById('e-obs').value=t.obs||'';
@@ -507,13 +648,20 @@ function fecharModal() { document.getElementById('modal-edit').classList.remove(
 async function salvarEdicao() {
   const btn=document.getElementById('btn-edit-save');
   btn.disabled=true;
-  const payload={id:editId,series:parseInt(document.getElementById('e-series').value),reps:parseInt(document.getElementById('e-reps').value),obs:document.getElementById('e-obs').value.trim()};
+  const payload={
+    id:editId,
+    diaTreino:document.getElementById('e-dia').value.trim(),
+    series:parseInt(document.getElementById('e-series').value),
+    reps:parseInt(document.getElementById('e-reps').value),
+    obs:document.getElementById('e-obs').value.trim()
+  };
   try {
     await api('update',payload);
     const i=treinos.findIndex(x=>x.id===editId);
     if(i!==-1) Object.assign(treinos[i],payload);
     localStorage.setItem(STORAGE_CACHE,JSON.stringify(treinos));
-    fecharModal(); renderHoje(); toast('✅ Editado!');
+    adicionarDiaConhecido(payload.diaTreino);
+    fecharModal(); renderHoje(); updateFiltros(); toast('✅ Editado!');
   } catch(e){toast('⚠️ Erro ao editar',true);}
   btn.disabled=false;
 }
