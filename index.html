@@ -10,7 +10,7 @@
     --bg:#0d0d0f;--surface:#16161a;--surface2:#1e1e24;--border:#2a2a33;
     --accent:#c8ff00;--accent2:#ff6b35;--text:#f0f0f5;--muted:#7a7a8c;--danger:#ff4757;--radius:16px;
     --c-amarelo:#ffd60a;--c-verde:#55c57a;--c-vermelho:#ff4757;--c-azul:#4fc3f7;
-    --c-preto:#555;--c-laranja:#ff6b35;--c-roxo:#9b59b6;
+    --c-preto:#666;--c-laranja:#ff6b35;--c-roxo:#9b59b6;
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;font-size:15px;overscroll-behavior:none}
@@ -28,7 +28,7 @@
   header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
   header h1{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:2px;color:var(--accent)}
   header p{font-size:11px;color:var(--muted);margin-top:2px}
-  .sync-pill{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;cursor:pointer}
+  .sync-pill{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;cursor:pointer;white-space:nowrap}
   .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -36,7 +36,7 @@
   .sync-dot.error{background:var(--danger);animation:blink 1s infinite}
 
   .nav-tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:57px;z-index:99}
-  .nav-tab{flex:1;padding:11px 4px;text-align:center;font-size:10px;font-weight:600;letter-spacing:.4px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase}
+  .nav-tab{flex:1;padding:11px 4px;text-align:center;font-size:10px;font-weight:600;letter-spacing:.3px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase}
   .nav-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 
   .page{display:none;padding:14px}
@@ -49,24 +49,24 @@
   input[type=text],input[type=number],select,textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color .2s;-webkit-appearance:none}
   input:focus,select:focus,textarea:focus{border-color:var(--accent)}
   select option{background:var(--surface2)}
-  textarea{resize:none;height:68px}
+  textarea{resize:none;height:64px}
   .form-row{margin-bottom:13px}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 
   /* Autocomplete */
-  .autocomplete-wrap{position:relative}
-  .autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin-top:4px;z-index:50;overflow:hidden;display:none}
-  .autocomplete-list.open{display:block}
-  .autocomplete-item{padding:10px 14px;font-size:14px;cursor:pointer;color:var(--text);border-bottom:1px solid var(--border)}
-  .autocomplete-item:last-child{border-bottom:none}
-  .autocomplete-item:active{background:var(--border)}
+  .ac-wrap{position:relative}
+  .ac-list{position:absolute;top:100%;left:0;right:0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin-top:4px;z-index:60;overflow:hidden;display:none;max-height:180px;overflow-y:auto}
+  .ac-list.open{display:block}
+  .ac-item{padding:10px 14px;font-size:14px;cursor:pointer;color:var(--text);border-bottom:1px solid var(--border)}
+  .ac-item:last-child{border-bottom:none}
+  .ac-item:active{background:var(--border)}
 
   .type-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
   .type-btn{flex:1;padding:10px 6px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
   .type-btn.active{background:var(--accent);color:#000}
 
   .color-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-  .color-chip{width:36px;height:36px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;flex-shrink:0}
+  .color-chip{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;flex-shrink:0}
   .color-chip.selected{border-color:var(--accent);transform:scale(1.15)}
   .color-labels{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
   .color-tag{display:flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:3px 9px 3px 5px;font-size:12px}
@@ -77,72 +77,102 @@
   .btn-primary{background:var(--accent);color:#000}
   .btn-primary:active{transform:scale(.97);filter:brightness(.9)}
   .btn-primary:disabled{opacity:.5;cursor:not-allowed}
+  .btn-secondary{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'Bebas Neue',cursive;letter-spacing:1px;font-size:15px}
   .btn-danger{background:transparent;border:1px solid var(--danger);color:var(--danger);font-size:13px;font-family:'DM Sans',sans-serif;padding:7px 12px;border-radius:8px}
-  .btn-secondary{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:15px;font-family:'Bebas Neue',cursive;letter-spacing:1px}
-  .btn-sm{width:auto;display:inline-block;padding:7px 14px;font-size:13px;border-radius:8px}
+  .btn-sm{width:auto;display:inline-block;padding:7px 14px;font-size:13px;border-radius:8px;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;font-weight:600}
 
-  .dia-group{margin-bottom:16px}
-  .dia-group-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-  .dia-group-label{font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:1.5px;color:var(--accent)}
-  .dia-group-count{font-size:12px;color:var(--muted)}
-  .dia-group-line{flex:1;height:1px;background:var(--border)}
-
-  .date-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-  .date-arrow{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:var(--text)}
+  /* ── HOJE ── */
+  .date-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .date-arrow{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px}
   .date-label{font-family:'Bebas Neue',cursive;font-size:19px;letter-spacing:1px}
 
-  .log-entry{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px;margin-bottom:10px;position:relative;overflow:hidden}
-  .log-entry::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
-  .entry-name{font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:1px;margin-bottom:6px}
-  .entry-meta{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
-  .badge{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 7px;font-size:12px;font-weight:500;color:var(--muted)}
-  .badge-g{background:rgba(200,255,0,.1);border-color:rgba(200,255,0,.25);color:var(--accent)}
-  .badge-o{background:rgba(255,107,53,.1);border-color:rgba(255,107,53,.25);color:var(--accent2)}
-  .dots-row{display:flex;gap:4px;align-items:center;margin-top:7px}
-  .edot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
-  .entry-actions{display:flex;gap:7px;margin-top:9px}
+  /* Seletor de dia de treino */
+  .dia-selector{margin-bottom:14px}
+  .dia-selector label{margin-bottom:8px}
+  .dias-chips{display:flex;flex-wrap:wrap;gap:7px}
+  .dia-chip{padding:7px 14px;border-radius:20px;font-size:13px;font-weight:600;background:var(--surface2);border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s}
+  .dia-chip.active{background:rgba(200,255,0,.15);border-color:var(--accent);color:var(--accent)}
+  .dia-chip-new{border-style:dashed}
 
+  /* Card de execução */
+  .exec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+  .exec-card.executado{border-color:rgba(200,255,0,.3)}
+  .exec-card-header{padding:13px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:10px}
+  .exec-card-left{flex:1;min-width:0}
+  .exec-nome{font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .exec-grupo{font-size:11px;color:var(--muted);margin-top:1px}
+  .exec-status{display:flex;align-items:center;gap:6px;flex-shrink:0}
+  .status-dot{width:9px;height:9px;border-radius:50%;background:var(--border)}
+  .status-dot.ok{background:var(--accent)}
+  .exec-summary{font-size:12px;color:var(--muted);text-align:right;line-height:1.4}
+  .exec-body{padding:0 14px 14px;border-top:1px solid var(--border);display:none}
+  .exec-body.open{display:block;padding-top:14px}
+
+  /* Mini color chips dentro do card */
+  .mini-color-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .mini-chip{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
+  .mini-chip.selected{border-color:var(--accent);transform:scale(1.12)}
+
+  /* Sugestão */
+  .sugestao-bar{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin-bottom:12px;gap:8px}
+  .sugestao-txt{font-size:12px;color:var(--muted);line-height:1.4;flex:1}
+  .sugestao-txt strong{color:var(--text)}
+  .btn-aplicar{background:rgba(200,255,0,.15);border:1px solid rgba(200,255,0,.3);color:var(--accent);font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif}
+
+  /* Dots decorativos */
+  .dots-row{display:flex;gap:4px;align-items:center;margin-top:6px}
+  .edot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
+
+  /* Histórico de cargas no card */
+  .hist-mini{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+  .hist-mini-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px}
+  .hist-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);padding:3px 0}
+  .hist-dots{display:flex;gap:2px}
+  .hdot{width:7px;height:7px;border-radius:50%;border:1px solid rgba(255,255,255,.1)}
+  .hist-vol{margin-left:auto;color:var(--accent);font-weight:700;font-size:11px}
+
+  /* Progresso */
   .prog-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px;margin-bottom:11px}
   .prog-name{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-  .prog-dia{font-size:12px;color:var(--muted);margin-bottom:11px}
-  .trend{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;padding:3px 8px;border-radius:20px}
+  .prog-sub{font-size:12px;color:var(--muted);margin-bottom:11px}
+  .trend{font-size:12px;font-weight:600;padding:3px 8px;border-radius:20px;font-family:'DM Sans',sans-serif}
   .trend-up{background:rgba(200,255,0,.15);color:var(--accent)}
   .trend-same{background:rgba(122,122,140,.15);color:var(--muted)}
   .trend-down{background:rgba(255,71,87,.1);color:var(--danger)}
+  .sec-hdr{font-family:'Bebas Neue',cursive;font-size:12px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--border)}
   .h-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
   .h-row:last-child{border-bottom:none}
-  .h-date{color:var(--muted);font-size:11px;min-width:68px}
+  .h-date{color:var(--muted);font-size:11px;min-width:65px}
   .h-dia{font-size:11px;color:var(--accent);background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:5px;padding:1px 6px}
-  .h-dots{display:flex;gap:3px}
-  .hdot{width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
-  .h-vol{margin-left:auto;font-weight:600;font-size:12px;color:var(--accent)}
-  .sec-hdr{font-family:'Bebas Neue',cursive;font-size:12px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+  .badge{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 7px;font-size:12px;font-weight:500;color:var(--muted)}
+  .badge-g{background:rgba(200,255,0,.1);border-color:rgba(200,255,0,.25);color:var(--accent)}
+  .h-vol{margin-left:auto;font-weight:700;font-size:12px;color:var(--accent)}
   .filter-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-  .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px}
-  .sum-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px}
-  .sum-num{font-family:'Bebas Neue',cursive;font-size:28px;color:var(--accent);line-height:1}
-  .sum-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+  /* Exercícios cadastrados */
+  .ex-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px;margin-bottom:9px;display:flex;align-items:center;gap:12px}
+  .ex-item-left{flex:1;min-width:0}
+  .ex-item-nome{font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:1px}
+  .ex-item-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;align-items:center}
+  .ex-item-actions{display:flex;gap:6px;flex-shrink:0}
 
-  /* CONFIG */
+  /* Config */
   .config-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
   .config-item-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
   .config-item-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:12px}
   .url-display{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--muted);word-break:break-all;margin-bottom:10px;line-height:1.5}
-  .url-display span{color:var(--accent)}
   .config-steps{font-size:12px;color:var(--muted);line-height:1.8;background:var(--surface2);border-radius:10px;padding:12px;margin-bottom:12px}
   .config-steps strong{color:var(--text)}
-  .danger-zone{border-color:rgba(255,71,87,.3);background:rgba(255,71,87,.04)}
-  .danger-zone .config-item-title{color:var(--danger)}
+  .danger-zone{border-color:rgba(255,71,87,.3)}
 
-  .empty{text-align:center;padding:44px 20px;color:var(--muted)}
-  .empty-icon{font-size:38px;margin-bottom:10px}
-  .empty h3{font-family:'Bebas Neue',cursive;font-size:21px;color:var(--text);margin-bottom:5px}
+  .empty{text-align:center;padding:40px 20px;color:var(--muted)}
+  .empty-icon{font-size:36px;margin-bottom:10px}
+  .empty h3{font-family:'Bebas Neue',cursive;font-size:20px;color:var(--text);margin-bottom:5px}
   .empty p{font-size:13px;line-height:1.5}
 
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;align-items:flex-end}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;align-items:flex-end}
   .modal-overlay.open{display:flex}
-  .modal{background:var(--surface);border-radius:20px 20px 0 0;padding:20px;width:100%;max-height:85vh;overflow-y:auto;animation:slideUp .25s ease-out}
+  .modal{background:var(--surface);border-radius:20px 20px 0 0;padding:20px;width:100%;max-height:88vh;overflow-y:auto;animation:slideUp .22s ease-out}
   @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
   .modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
   .modal-title{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:1px}
@@ -150,7 +180,6 @@
 
   #offline-bar{display:none;background:rgba(255,71,87,.12);border:1px solid rgba(255,71,87,.3);border-radius:10px;padding:9px 13px;margin:10px 14px 0;font-size:12px;color:var(--danger)}
   #offline-bar.show{display:block}
-
   #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--accent);color:#000;font-weight:700;font-size:13px;padding:9px 20px;border-radius:30px;z-index:999;transition:transform .3s;white-space:nowrap}
   #toast.show{transform:translateX(-50%) translateY(0)}
   #toast.err{background:var(--danger);color:#fff}
@@ -180,92 +209,48 @@
 <!-- APP -->
 <div id="app-screen">
   <header>
-    <div>
-      <h1>⚡ ElasticFit</h1>
-      <p>Controle de Treino com Elásticos</p>
-    </div>
-    <div class="sync-pill" onclick="sincronizar()" title="Toque para sincronizar">
+    <div><h1>⚡ ElasticFit</h1><p>Controle de Treino com Elásticos</p></div>
+    <div class="sync-pill" onclick="sincronizar()" title="Sincronizar">
       <div class="sync-dot" id="sync-dot"></div>
       <span id="sync-lbl">Sheets</span>
     </div>
   </header>
-
-  <div id="offline-bar">⚠️ Sem conexão com o Sheets. Vá em Config e atualize a URL.</div>
+  <div id="offline-bar">⚠️ Sem conexão. Vá em Config e verifique a URL.</div>
 
   <nav class="nav-tabs">
-    <div class="nav-tab active" onclick="showPage('registrar')">📝 Registrar</div>
-    <div class="nav-tab" onclick="showPage('hoje')">📅 Hoje</div>
+    <div class="nav-tab active" onclick="showPage('hoje')">📅 Hoje</div>
+    <div class="nav-tab" onclick="showPage('exercicios')">🏋️ Exercícios</div>
     <div class="nav-tab" onclick="showPage('progresso')">📈 Progresso</div>
     <div class="nav-tab" onclick="showPage('config')">⚙️ Config</div>
   </nav>
 
-  <!-- REGISTRAR -->
-  <div class="page active" id="page-registrar">
-    <div class="card">
-      <div class="card-title">Novo Exercício</div>
-      <div class="form-row">
-        <label>Dia de Treino <span style="color:var(--muted);font-weight:400">(ex: Treino A, Pernas)</span></label>
-        <div class="autocomplete-wrap">
-          <input type="text" id="dia-treino" placeholder="Digite o nome do treino..." autocomplete="off" oninput="onDiaInput()" onfocus="onDiaInput()" onblur="setTimeout(fecharAuto,200)">
-          <div class="autocomplete-list" id="auto-list"></div>
-        </div>
-      </div>
-      <div class="form-row"><label>Nome do Exercício</label><input type="text" id="nome" placeholder="Ex: Rosca Bíceps..."></div>
-      <div class="form-row"><label>Grupo Muscular</label>
-        <select id="grupo">
-          <option value="">Selecione...</option>
-          <option>Bíceps</option><option>Tríceps</option><option>Ombro</option><option>Peito</option>
-          <option>Costas</option><option>Glúteo</option><option>Pernas</option><option>Abdômen</option>
-          <option>Cardio</option><option>Funcional</option>
-        </select>
-      </div>
-      <div class="form-grid form-row">
-        <div><label>Séries</label><input type="number" id="series" placeholder="3" min="1" max="20"></div>
-        <div><label>Repetições</label><input type="number" id="reps" placeholder="12" min="1" max="200"></div>
-      </div>
-      <div class="form-row"><label>Data do Treino</label><input type="text" id="data-treino" placeholder="dd/mm/aaaa"></div>
-      <div class="form-row">
-        <label>Tipo de Elástico</label>
-        <div class="type-toggle">
-          <div class="type-btn active" onclick="setTipo('tubo')" id="btn-tubo">🔵 Tubo</div>
-          <div class="type-btn" onclick="setTipo('fita')" id="btn-fita">📏 Fita</div>
-          <div class="type-btn" onclick="setTipo('ambos')" id="btn-ambos">🔀 Ambos</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Cores <span style="color:var(--muted);font-weight:400">(uma ou mais)</span></label>
-        <div class="color-grid" id="color-grid">
-          <div class="color-chip selected" style="background:var(--c-amarelo)" data-cor="Amarelo" onclick="toggleCor(this)"></div>
-          <div class="color-chip" style="background:var(--c-verde)" data-cor="Verde" onclick="toggleCor(this)"></div>
-          <div class="color-chip" style="background:var(--c-vermelho)" data-cor="Vermelho" onclick="toggleCor(this)"></div>
-          <div class="color-chip" style="background:var(--c-azul)" data-cor="Azul" onclick="toggleCor(this)"></div>
-          <div class="color-chip" style="background:var(--c-preto)" data-cor="Preto" onclick="toggleCor(this)"></div>
-          <div class="color-chip" style="background:var(--c-laranja)" data-cor="Laranja" onclick="toggleCor(this)"></div>
-          <div class="color-chip" style="background:var(--c-roxo)" data-cor="Roxo" onclick="toggleCor(this)"></div>
-        </div>
-        <div class="color-labels" id="color-labels"></div>
-        <p class="info-tip">💡 Selecione várias cores para elásticos combinados</p>
-      </div>
-      <div class="form-row"><label>Observações</label><textarea id="obs" placeholder="Dificuldade, técnica, sensações..."></textarea></div>
-      <button class="btn btn-primary" id="btn-salvar" onclick="salvarExercicio()">SALVAR NO GOOGLE SHEETS</button>
-    </div>
-  </div>
-
-  <!-- HOJE -->
-  <div class="page" id="page-hoje">
+  <!-- ── HOJE ── -->
+  <div class="page active" id="page-hoje">
     <div class="date-bar">
       <div class="date-arrow" onclick="mudarDia(-1)">‹</div>
       <div class="date-label" id="label-dia"></div>
       <div class="date-arrow" onclick="mudarDia(1)">›</div>
     </div>
-    <div class="summary-grid" id="sum-grid" style="display:none">
-      <div class="sum-card"><div class="sum-num" id="s-ex">0</div><div class="sum-lbl">Exercícios</div></div>
-      <div class="sum-card"><div class="sum-num" id="s-sr">0</div><div class="sum-lbl">Séries Totais</div></div>
+
+    <!-- Seletor de dia de treino -->
+    <div class="dia-selector">
+      <label>Dia de Treino</label>
+      <div class="dias-chips" id="dias-chips"></div>
     </div>
-    <div id="lista-hoje"></div>
+
+    <div id="exec-lista"></div>
   </div>
 
-  <!-- PROGRESSO -->
+  <!-- ── EXERCÍCIOS (cadastro) ── -->
+  <div class="page" id="page-exercicios">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <span style="font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px">Exercícios Cadastrados</span>
+      <button class="btn-sm" style="background:var(--accent);color:#000" onclick="abrirModalCadastro()">+ Novo</button>
+    </div>
+    <div id="lista-exercicios"></div>
+  </div>
+
+  <!-- ── PROGRESSO ── -->
   <div class="page" id="page-progresso">
     <div class="card" style="margin-bottom:11px">
       <div class="card-title">Histórico por Exercício</div>
@@ -277,155 +262,191 @@
     <div id="lista-prog"></div>
   </div>
 
-  <!-- CONFIG -->
+  <!-- ── CONFIG ── -->
   <div class="page" id="page-config">
-
     <div class="config-item">
       <div class="config-item-title">🔗 URL do Google Apps Script</div>
-      <div class="config-item-desc">Cole aqui a URL gerada após cada nova implantação no Apps Script.</div>
-      <div class="url-display" id="url-display">Carregando...</div>
-      <div class="form-row" style="margin-bottom:10px">
-        <label>Nova URL</label>
-        <input type="text" id="nova-url" placeholder="https://script.google.com/macros/s/...">
-      </div>
+      <div class="config-item-desc">Cole a URL gerada após cada nova implantação.</div>
+      <div class="url-display" id="url-display"></div>
+      <div class="form-row" style="margin-bottom:10px"><label>Nova URL</label><input type="text" id="nova-url" placeholder="https://script.google.com/macros/s/..."></div>
       <button class="btn btn-primary" onclick="salvarNovaUrl()" style="margin-bottom:8px">SALVAR NOVA URL</button>
       <button class="btn btn-secondary" onclick="testarConexao()">TESTAR CONEXÃO</button>
     </div>
-
     <div class="config-item">
-      <div class="config-item-title">📋 Como reimplantar o Apps Script</div>
+      <div class="config-item-title">📋 Como reimplantar</div>
       <div class="config-steps">
-        1. Abra o Apps Script da sua planilha<br>
-        2. Clique em <strong>Implantar → Gerenciar implantações</strong><br>
-        3. Clique no ✏️ (lápis) da implantação existente<br>
-        4. Em "Versão" selecione <strong>Nova versão</strong><br>
-        5. Clique em <strong>Implantar</strong><br>
-        6. Copie a URL gerada e cole no campo acima
+        1. Apps Script → <strong>Implantar → Gerenciar implantações</strong><br>
+        2. Clique no ✏️ da implantação existente<br>
+        3. Versão → <strong>Nova versão</strong> → Implantar<br>
+        4. Copie a URL e cole acima
       </div>
     </div>
-
     <div class="config-item">
       <div class="config-item-title">🔄 Sincronização</div>
-      <div class="config-item-desc">Force uma nova sincronização com o Google Sheets para atualizar os dados locais.</div>
+      <div class="config-item-desc">Force atualização dos dados locais.</div>
       <button class="btn btn-secondary" onclick="sincronizar();toast('🔄 Sincronizando...')">SINCRONIZAR AGORA</button>
     </div>
-
     <div class="config-item danger-zone">
-      <div class="config-item-title">⚠️ Desconectar</div>
-      <div class="config-item-desc">Remove a URL salva e volta para a tela inicial. Os dados na planilha não são apagados.</div>
-      <button class="btn btn-danger" style="width:100%;padding:12px;font-size:14px" onclick="desconectar()">DESCONECTAR DO SHEETS</button>
+      <div class="config-item-title" style="color:var(--danger)">⚠️ Desconectar</div>
+      <div class="config-item-desc">Remove a URL salva e volta para a tela inicial.</div>
+      <button class="btn btn-danger" style="width:100%;padding:12px" onclick="desconectar()">DESCONECTAR DO SHEETS</button>
     </div>
-
   </div>
 </div>
 
-<!-- MODAL EDITAR -->
-<div class="modal-overlay" id="modal-edit">
+<!-- MODAL CADASTRO / EDIÇÃO DE EXERCÍCIO -->
+<div class="modal-overlay" id="modal-ex">
   <div class="modal">
     <div class="modal-hdr">
-      <div class="modal-title">Editar Exercício</div>
-      <button class="modal-close" onclick="fecharModal()">✕</button>
+      <div class="modal-title" id="modal-ex-title">Novo Exercício</div>
+      <button class="modal-close" onclick="fecharModalEx()">✕</button>
     </div>
     <div class="form-row">
-      <label>Dia de Treino</label>
-      <div class="autocomplete-wrap">
-        <input type="text" id="e-dia" autocomplete="off" oninput="onEditDiaInput()" onfocus="onEditDiaInput()" onblur="setTimeout(fecharAutoEdit,200)">
-        <div class="autocomplete-list" id="auto-list-edit"></div>
+      <label>Dia de Treino <span style="color:var(--muted);font-weight:400">(ex: Treino A, Pernas)</span></label>
+      <div class="ac-wrap">
+        <input type="text" id="ex-dia" placeholder="Nome do treino..." autocomplete="off" oninput="acDia('ex-dia','ac-ex-dia')" onfocus="acDia('ex-dia','ac-ex-dia')" onblur="setTimeout(()=>fecharAc('ac-ex-dia'),200)">
+        <div class="ac-list" id="ac-ex-dia"></div>
       </div>
     </div>
-    <div class="form-row"><label>Séries</label><input type="number" id="e-series"></div>
-    <div class="form-row"><label>Repetições</label><input type="number" id="e-reps"></div>
-    <div class="form-row"><label>Observações</label><textarea id="e-obs"></textarea></div>
-    <button class="btn btn-primary" id="btn-edit-save" onclick="salvarEdicao()">SALVAR ALTERAÇÕES</button>
+    <div class="form-row">
+      <label>Nome do Exercício</label>
+      <input type="text" id="ex-nome" placeholder="Ex: Rosca Bíceps...">
+      <div id="ex-nome-lock-hint" style="display:none;font-size:11px;color:var(--muted);margin-top:5px">🔒 O nome não pode ser alterado (é a chave do exercício)</div>
+    </div>
+    <div class="form-row"><label>Grupo Muscular</label>
+      <select id="ex-grupo">
+        <option value="">Selecione...</option>
+        <option>Bíceps</option><option>Tríceps</option><option>Ombro</option><option>Peito</option>
+        <option>Costas</option><option>Glúteo</option><option>Pernas</option><option>Abdômen</option>
+        <option>Cardio</option><option>Funcional</option>
+      </select>
+    </div>
+    <div class="form-grid form-row">
+      <div><label>Séries padrão</label><input type="number" id="ex-series" placeholder="3" min="1" max="20"></div>
+      <div><label>Reps padrão</label><input type="number" id="ex-reps" placeholder="12" min="1" max="200"></div>
+    </div>
+    <div class="form-row"><label>Tipo padrão</label>
+      <div class="type-toggle">
+        <div class="type-btn active" onclick="setTipoEx('tubo')" id="ex-btn-tubo">🔵 Tubo</div>
+        <div class="type-btn" onclick="setTipoEx('fita')" id="ex-btn-fita">📏 Fita</div>
+        <div class="type-btn" onclick="setTipoEx('ambos')" id="ex-btn-ambos">🔀 Ambos</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Cores padrão</label>
+      <div class="color-grid" id="ex-color-grid">
+        <div class="color-chip selected" style="background:var(--c-amarelo)" data-cor="Amarelo" onclick="toggleCorEx(this)"></div>
+        <div class="color-chip" style="background:var(--c-verde)" data-cor="Verde" onclick="toggleCorEx(this)"></div>
+        <div class="color-chip" style="background:var(--c-vermelho)" data-cor="Vermelho" onclick="toggleCorEx(this)"></div>
+        <div class="color-chip" style="background:var(--c-azul)" data-cor="Azul" onclick="toggleCorEx(this)"></div>
+        <div class="color-chip" style="background:var(--c-preto)" data-cor="Preto" onclick="toggleCorEx(this)"></div>
+        <div class="color-chip" style="background:var(--c-laranja)" data-cor="Laranja" onclick="toggleCorEx(this)"></div>
+        <div class="color-chip" style="background:var(--c-roxo)" data-cor="Roxo" onclick="toggleCorEx(this)"></div>
+      </div>
+      <div class="color-labels" id="ex-color-labels"></div>
+    </div>
+    <div class="form-row"><label>Observações</label><textarea id="ex-obs" placeholder="Notas gerais sobre o exercício..."></textarea></div>
+    <button class="btn btn-primary" id="btn-salvar-ex" onclick="salvarExercicio()">SALVAR EXERCÍCIO</button>
+  </div>
+</div>
+
+<!-- MODAL NOVO DIA DE TREINO (na aba Hoje) -->
+<div class="modal-overlay" id="modal-novo-dia">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title">Novo Dia de Treino</div>
+      <button class="modal-close" onclick="fecharModalNovoDia()">✕</button>
+    </div>
+    <div class="form-row">
+      <label>Nome do dia</label>
+      <div class="ac-wrap">
+        <input type="text" id="novo-dia-input" placeholder="Ex: Treino A, Pernas, Segunda..." autocomplete="off" oninput="acDia('novo-dia-input','ac-novo-dia')" onfocus="acDia('novo-dia-input','ac-novo-dia')" onblur="setTimeout(()=>fecharAc('ac-novo-dia'),200)">
+        <div class="ac-list" id="ac-novo-dia"></div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="confirmarNovoDia()">SELECIONAR</button>
   </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
-const STORAGE_URL   = 'ef_api_url';
-const STORAGE_CACHE = 'ef_cache';
-const STORAGE_DIAS  = 'ef_dias';
+// ── ESTADO ────────────────────────────────────────────────
+const SK_URL  = 'ef_url';
+const SK_EX   = 'ef_exercicios';
+const SK_EXEC = 'ef_execucoes';
+const SK_DIAS = 'ef_dias';
 
 const COR = {
   Amarelo:'var(--c-amarelo)',Verde:'var(--c-verde)',Vermelho:'var(--c-vermelho)',
   Azul:'var(--c-azul)',Preto:'var(--c-preto)',Laranja:'var(--c-laranja)',Roxo:'var(--c-roxo)'
 };
 
-let apiUrl = localStorage.getItem(STORAGE_URL) || '';
-let tipo = 'tubo';
-let cores = ['Amarelo'];
-let dataDia = new Date();
-let editId = null;
-let treinos = [];
+let apiUrl      = localStorage.getItem(SK_URL) || '';
+let exercicios  = [];   // cadastro
+let execucoes   = [];   // registros diários
 let diasConhecidos = [];
+
+let dataDia     = new Date();
+let diaSelecionado = '';
+
+// estado do modal de exercício
+let editExId    = null;
+let tipoEx      = 'tubo';
+let coresEx     = ['Amarelo'];
 
 // ── INIT ──────────────────────────────────────────────────
 function init() {
   if (apiUrl) mostrarApp();
-  document.getElementById('data-treino').value = hojeFmt();
-  initChips();
-  document.getElementById('label-dia').textContent = fmtDate(dataDia).toUpperCase();
-  const dc = localStorage.getItem(STORAGE_DIAS);
-  if (dc) try { diasConhecidos = JSON.parse(dc); } catch(e) {}
+  atualizarLabelDia();
+  const dc = ls(SK_DIAS); if (dc) diasConhecidos = dc;
+}
+
+function ls(k, v) {
+  if (v !== undefined) { localStorage.setItem(k, JSON.stringify(v)); return; }
+  try { return JSON.parse(localStorage.getItem(k)) || []; } catch(e) { return []; }
 }
 
 function conectar() {
   const url = document.getElementById('api-url-input').value.trim();
   if (!url.includes('script.google.com')) { toast('⚠️ URL inválida', true); return; }
-  apiUrl = url;
-  localStorage.setItem(STORAGE_URL, url);
+  apiUrl = url; localStorage.setItem(SK_URL, url);
   mostrarApp();
 }
 
 function mostrarApp() {
   document.getElementById('setup-screen').style.display = 'none';
   document.getElementById('app-screen').style.display = 'block';
-  const c = localStorage.getItem(STORAGE_CACHE);
-  if (c) try { treinos = JSON.parse(c); } catch(e) {}
+  exercicios = ls(SK_EX); execucoes = ls(SK_EXEC);
   atualizarUrlDisplay();
   sincronizar();
-}
-
-function atualizarUrlDisplay() {
-  const el = document.getElementById('url-display');
-  if (apiUrl) {
-    const curta = apiUrl.replace('https://script.google.com/macros/s/', '').substring(0, 30);
-    el.innerHTML = `<span>…${curta}…</span><br><span style="color:var(--muted);font-size:10px">script.google.com</span>`;
-  } else {
-    el.innerHTML = '<span style="color:var(--danger)">Nenhuma URL configurada</span>';
-  }
 }
 
 // ── CONFIG ────────────────────────────────────────────────
+function atualizarUrlDisplay() {
+  const el = document.getElementById('url-display');
+  if (!el) return;
+  el.innerHTML = apiUrl
+    ? `<span style="color:var(--accent)">${apiUrl.substring(0,60)}…</span>`
+    : '<span style="color:var(--danger)">Nenhuma URL configurada</span>';
+}
 function salvarNovaUrl() {
-  const nova = document.getElementById('nova-url').value.trim();
-  if (!nova) { toast('⚠️ Digite a nova URL', true); return; }
-  if (!nova.includes('script.google.com')) { toast('⚠️ URL inválida', true); return; }
-  apiUrl = nova;
-  localStorage.setItem(STORAGE_URL, nova);
+  const u = document.getElementById('nova-url').value.trim();
+  if (!u.includes('script.google.com')) { toast('⚠️ URL inválida', true); return; }
+  apiUrl = u; localStorage.setItem(SK_URL, u);
   document.getElementById('nova-url').value = '';
   atualizarUrlDisplay();
   document.getElementById('offline-bar').classList.remove('show');
-  toast('✅ URL atualizada! Sincronizando...');
-  sincronizar();
+  toast('✅ URL atualizada!'); sincronizar();
 }
-
 async function testarConexao() {
-  if (!apiUrl) { toast('⚠️ Nenhuma URL configurada', true); return; }
-  toast('🔄 Testando conexão...');
-  try {
-    await api('getAll');
-    toast('✅ Conexão funcionando!');
-  } catch(e) {
-    toast('❌ Falha na conexão. Verifique a URL.', true);
-  }
+  toast('🔄 Testando...');
+  try { await api('getExercicios'); toast('✅ Conexão ok!'); }
+  catch(e) { toast('❌ Falha na conexão', true); }
 }
-
 function desconectar() {
-  if (!confirm('Desconectar do Google Sheets? Os dados na planilha não serão apagados.')) return;
-  localStorage.removeItem(STORAGE_URL);
-  apiUrl = '';
+  if (!confirm('Desconectar? Os dados na planilha permanecem.')) return;
+  localStorage.removeItem(SK_URL); apiUrl = '';
   document.getElementById('app-screen').style.display = 'none';
   document.getElementById('setup-screen').style.display = 'flex';
 }
@@ -434,21 +455,21 @@ function desconectar() {
 function setSync(s) {
   const dot = document.getElementById('sync-dot');
   const lbl = document.getElementById('sync-lbl');
-  dot.className = 'sync-dot' + (s==='sync'?' syncing':s==='error'?' error':'');
+  dot.className = 'sync-dot'+(s==='sync'?' syncing':s==='error'?' error':'');
   lbl.textContent = s==='sync'?'Salvando…':s==='error'?'Erro':'Sheets ✓';
 }
 
 async function api(action, payload) {
   setSync('sync');
-  const params = new URLSearchParams({ action });
-  if (payload) params.set('payload', JSON.stringify(payload));
+  const p = new URLSearchParams({ action });
+  if (payload) p.set('payload', JSON.stringify(payload));
   try {
-    const res = await fetch(apiUrl + '?' + params.toString());
-    const data = await res.json();
-    if (data.error) throw new Error(data.error);
+    const r = await fetch(apiUrl+'?'+p.toString());
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
     setSync('ok');
     document.getElementById('offline-bar').classList.remove('show');
-    return data;
+    return d;
   } catch(err) {
     setSync('error');
     document.getElementById('offline-bar').classList.add('show');
@@ -458,41 +479,17 @@ async function api(action, payload) {
 
 async function sincronizar() {
   try {
-    const data = await api('getAll');
-    treinos = data.treinos || [];
-    localStorage.setItem(STORAGE_CACHE, JSON.stringify(treinos));
-    diasConhecidos = [...new Set(treinos.map(t => t.diaTreino).filter(Boolean))];
-    localStorage.setItem(STORAGE_DIAS, JSON.stringify(diasConhecidos));
-    updateFiltros();
-    renderHoje();
+    const [re, rx] = await Promise.all([api('getExercicios'), api('getExecucoes')]);
+    exercicios = re.exercicios || []; ls(SK_EX, exercicios);
+    execucoes  = rx.execucoes  || []; ls(SK_EXEC, execucoes);
+    // atualiza dias conhecidos
+    const dEx   = exercicios.map(e => e.diaTreino).filter(Boolean);
+    const dExec = execucoes.map(e => e.diaTreino).filter(Boolean);
+    diasConhecidos = [...new Set([...dEx, ...dExec])];
+    ls(SK_DIAS, diasConhecidos);
+    renderHoje(); renderExercicios(); updateFiltros();
   } catch(e) {
-    updateFiltros();
-    renderHoje();
-  }
-}
-
-// ── AUTOCOMPLETE ──────────────────────────────────────────
-function getSugestoes(val) {
-  if (!val) return diasConhecidos;
-  return diasConhecidos.filter(d => d.toLowerCase().includes(val.toLowerCase()));
-}
-function renderAutoList(listId, inputId, sugestoes) {
-  const list = document.getElementById(listId);
-  if (!sugestoes.length) { list.classList.remove('open'); return; }
-  list.innerHTML = sugestoes.map(d =>
-    `<div class="autocomplete-item" onmousedown="selecionarDia('${inputId}','${listId}','${d}')">${d}</div>`
-  ).join('');
-  list.classList.add('open');
-}
-function onDiaInput() { renderAutoList('auto-list','dia-treino',getSugestoes(document.getElementById('dia-treino').value)); }
-function onEditDiaInput() { renderAutoList('auto-list-edit','e-dia',getSugestoes(document.getElementById('e-dia').value)); }
-function selecionarDia(inputId, listId, val) { document.getElementById(inputId).value=val; document.getElementById(listId).classList.remove('open'); }
-function fecharAuto() { document.getElementById('auto-list').classList.remove('open'); }
-function fecharAutoEdit() { document.getElementById('auto-list-edit').classList.remove('open'); }
-function adicionarDiaConhecido(dia) {
-  if (dia && !diasConhecidos.includes(dia)) {
-    diasConhecidos.push(dia);
-    localStorage.setItem(STORAGE_DIAS, JSON.stringify(diasConhecidos));
+    renderHoje(); renderExercicios(); updateFiltros();
   }
 }
 
@@ -502,126 +499,387 @@ function fmtDate(d) { return d.toLocaleDateString('pt-BR',{weekday:'short',day:'
 function fmtShort(d) { return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
 function parseDate(s) { const [d,m,y]=s.split('/'); return new Date(+y,+m-1,+d); }
 
+function atualizarLabelDia() {
+  const el = document.getElementById('label-dia');
+  if (el) el.textContent = fmtDate(dataDia).toUpperCase();
+}
+
 // ── NAVEGAÇÃO ─────────────────────────────────────────────
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  ['registrar','hoje','progresso','config'].forEach((p,i)=>{ if(p===id) document.querySelectorAll('.nav-tab')[i].classList.add('active'); });
+  ['hoje','exercicios','progresso','config'].forEach((p,i)=>{
+    if(p===id) document.querySelectorAll('.nav-tab')[i].classList.add('active');
+  });
   if(id==='hoje') renderHoje();
+  if(id==='exercicios') renderExercicios();
   if(id==='progresso') renderProgresso();
   if(id==='config') atualizarUrlDisplay();
 }
 
-// ── TIPO & COR ────────────────────────────────────────────
-function setTipo(t) {
-  tipo=t;
-  ['tubo','fita','ambos'].forEach(x=>document.getElementById('btn-'+x).classList.toggle('active',x===t));
-}
-function toggleCor(el) {
-  const c=el.dataset.cor, i=cores.indexOf(c);
-  if(i===-1){cores.push(c);el.classList.add('selected');}
-  else{if(cores.length===1){toast('⚠️ Mínimo uma cor',true);return;}cores.splice(i,1);el.classList.remove('selected');}
-  renderCorTags();
-}
-function renderCorTags() {
-  document.getElementById('color-labels').innerHTML=cores.map(c=>
-    `<span class="color-tag"><span class="color-tag-dot" style="background:${COR[c]}"></span>${c}</span>`
-  ).join('');
-}
-function initChips() {
-  document.querySelectorAll('.color-chip').forEach(el=>el.classList.toggle('selected',cores.includes(el.dataset.cor)));
-  renderCorTags();
+// ── DIA DE TREINO (chips na aba Hoje) ─────────────────────
+function mudarDia(d) { dataDia=new Date(dataDia); dataDia.setDate(dataDia.getDate()+d); atualizarLabelDia(); renderHoje(); }
+
+function renderDiasChips() {
+  const wrap = document.getElementById('dias-chips');
+  // dias disponíveis = dias dos exercícios cadastrados
+  const dias = [...new Set(exercicios.map(e=>e.diaTreino).filter(Boolean))].sort();
+  let html = dias.map(d => `
+    <div class="dia-chip${d===diaSelecionado?' active':''}" onclick="selecionarDia('${d}')">${d}</div>
+  `).join('');
+  html += `<div class="dia-chip dia-chip-new" onclick="abrirModalNovoDia()">+ outro</div>`;
+  wrap.innerHTML = html;
 }
 
-// ── SALVAR ────────────────────────────────────────────────
-async function salvarExercicio() {
-  const diaTreino=document.getElementById('dia-treino').value.trim();
-  const nome=document.getElementById('nome').value.trim();
-  const grupo=document.getElementById('grupo').value;
-  const ser=parseInt(document.getElementById('series').value);
-  const rep=parseInt(document.getElementById('reps').value);
-  const data=document.getElementById('data-treino').value.trim();
-  const obs=document.getElementById('obs').value.trim();
+function selecionarDia(d) {
+  diaSelecionado = d;
+  renderHoje();
+}
 
-  if(!diaTreino){toast('⚠️ Informe o dia de treino',true);return;}
-  if(!nome){toast('⚠️ Informe o nome do exercício',true);return;}
-  if(!ser){toast('⚠️ Informe as séries',true);return;}
-  if(!rep){toast('⚠️ Informe as repetições',true);return;}
-  if(!/^\d{2}\/\d{2}\/\d{4}$/.test(data)){toast('⚠️ Data inválida (dd/mm/aaaa)',true);return;}
-
-  const t={id:Date.now().toString(),nome,grupo,series:ser,reps:rep,data,tipo,cores:[...cores],obs,criadoEm:new Date().toISOString(),diaTreino};
-  const btn=document.getElementById('btn-salvar');
-  btn.disabled=true;btn.textContent='SALVANDO…';
-
-  try {
-    await api('save',t);
-    treinos.push(t);
-    localStorage.setItem(STORAGE_CACHE,JSON.stringify(treinos));
-    adicionarDiaConhecido(diaTreino);
-    ['nome','grupo','series','reps','obs'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('data-treino').value=hojeFmt();
-    toast('✅ Salvo no Google Sheets!');
-    updateFiltros();
-  } catch(e){toast('⚠️ Erro ao salvar.',true);}
-
-  btn.disabled=false;btn.textContent='SALVAR NO GOOGLE SHEETS';
+function abrirModalNovoDia() {
+  document.getElementById('novo-dia-input').value = '';
+  document.getElementById('modal-novo-dia').classList.add('open');
+}
+function fecharModalNovoDia() { document.getElementById('modal-novo-dia').classList.remove('open'); }
+function confirmarNovoDia() {
+  const v = document.getElementById('novo-dia-input').value.trim();
+  if (!v) { toast('⚠️ Digite o nome do treino', true); return; }
+  diaSelecionado = v;
+  fecharModalNovoDia();
+  renderHoje();
 }
 
 // ── HOJE ──────────────────────────────────────────────────
-function mudarDia(d){dataDia=new Date(dataDia);dataDia.setDate(dataDia.getDate()+d);renderHoje();}
-
 function renderHoje() {
-  document.getElementById('label-dia').textContent=fmtDate(dataDia).toUpperCase();
-  const dStr=fmtShort(dataDia);
-  const lista=treinos.filter(t=>t.data===dStr);
-  const el=document.getElementById('lista-hoje');
-  const sg=document.getElementById('sum-grid');
-  if(!lista.length){
-    sg.style.display='none';
-    el.innerHTML=`<div class="empty"><div class="empty-icon">🏋️</div><h3>Nenhum treino neste dia</h3><p>Use a aba Registrar para adicionar</p></div>`;
+  atualizarLabelDia();
+  renderDiasChips();
+  const container = document.getElementById('exec-lista');
+
+  if (!diaSelecionado) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">👆</div><h3>Selecione o dia de treino</h3><p>Escolha ou crie um dia de treino acima</p></div>`;
     return;
   }
-  sg.style.display='grid';
-  document.getElementById('s-ex').textContent=lista.length;
-  document.getElementById('s-sr').textContent=lista.reduce((a,t)=>a+(+t.series||0),0);
-  const grupos={};
-  lista.forEach(t=>{const k=t.diaTreino||'—';if(!grupos[k])grupos[k]=[];grupos[k].push(t);});
-  el.innerHTML=Object.entries(grupos).map(([dia,items])=>`
-    <div class="dia-group">
-      <div class="dia-group-header">
-        <div class="dia-group-label">${dia}</div>
-        <div class="dia-group-count">${items.length} exercício${items.length>1?'s':''}</div>
-        <div class="dia-group-line"></div>
+
+  // exercícios deste dia de treino
+  const exDoDia = exercicios.filter(e => e.diaTreino === diaSelecionado);
+  if (!exDoDia.length) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">🏋️</div><h3>Nenhum exercício neste dia</h3><p>Cadastre exercícios na aba Exercícios e associe ao dia <strong>${diaSelecionado}</strong></p></div>`;
+    return;
+  }
+
+  const dataStr = fmtShort(dataDia);
+
+  container.innerHTML = exDoDia.map(ex => {
+    // execução de hoje para este exercício
+    const execHoje = execucoes.find(e => e.exercicioNome===ex.nome && e.data===dataStr && e.diaTreino===diaSelecionado);
+    // último registro anterior (para sugestão)
+    const historico = execucoes
+      .filter(e => e.exercicioNome===ex.nome && e.diaTreino===diaSelecionado && e.data!==dataStr)
+      .sort((a,b) => parseDate(b.data)-parseDate(a.data));
+    const ultimo = historico[0];
+
+    // dados sugeridos: se tem execução de hoje usa ela, senão usa último, senão usa cadastro
+    const base = execHoje || ultimo || ex;
+    const executado = !!execHoje;
+
+    const dots = (base.cores||[]).map(c=>`<div class="edot" style="background:${COR[c]||'#888'}"></div>`).join('');
+    const tipoLabel = base.tipo==='tubo'?'🔵 Tubo':base.tipo==='fita'?'📏 Fita':'🔀 Ambos';
+
+    // mini histórico (últimas 3 execuções)
+    const histHtml = historico.slice(0,3).map(h => {
+      const hd = (h.cores||[]).map(c=>`<div class="hdot" style="background:${COR[c]||'#888'}"></div>`).join('');
+      const vol = (+h.series)*(+h.reps)*(h.cores||[]).length;
+      return `<div class="hist-row">
+        <span class="h-date">${h.data}</span>
+        <span>${h.series}x${h.reps}</span>
+        <div class="hist-dots">${hd}</div>
+        <span>${(h.cores||[]).join('+')}</span>
+        <span class="hist-vol">Vol:${vol}</span>
+      </div>`;
+    }).join('');
+
+    return `<div class="exec-card${executado?' executado':''}" id="ecard-${ex.id}">
+      <div class="exec-card-header" onclick="toggleExecCard('${ex.id}')">
+        <div class="exec-card-left">
+          <div class="exec-nome">${ex.nome}</div>
+          <div class="exec-grupo">${ex.grupo||''}</div>
+        </div>
+        <div class="exec-status">
+          ${executado ? `<div class="exec-summary">${execHoje.series}x${execHoje.reps}<br><span style="font-size:10px">${(execHoje.cores||[]).join('+')}</span></div>` : ''}
+          <div class="status-dot${executado?' ok':''}"></div>
+        </div>
       </div>
-      ${items.map(entryHTML).join('')}
+      <div class="exec-body" id="ebody-${ex.id}">
+        ${!executado && ultimo ? `
+        <div class="sugestao-bar">
+          <div class="sugestao-txt">Último: <strong>${ultimo.series}x${ultimo.reps}</strong> · ${(ultimo.cores||[]).join('+')} · ${ultimo.data}</div>
+          <button class="btn-aplicar" onclick="aplicarSugestao('${ex.id}','${ex.nome}')">Usar este</button>
+        </div>` : ''}
+        ${!executado && !ultimo ? `<div class="sugestao-bar"><div class="sugestao-txt">Sugestão do cadastro: <strong>${ex.series}x${ex.reps}</strong> · ${(ex.cores||[]).join('+')||'—'}</div><button class="btn-aplicar" onclick="aplicarSugestao('${ex.id}','${ex.nome}')">Usar este</button></div>` : ''}
+
+        <div class="form-grid form-row">
+          <div><label>Séries</label><input type="number" id="inp-series-${ex.id}" value="${(execHoje||base).series||''}" min="1" max="20"></div>
+          <div><label>Reps</label><input type="number" id="inp-reps-${ex.id}" value="${(execHoje||base).reps||''}" min="1" max="200"></div>
+        </div>
+        <div class="form-row"><label>Tipo de Elástico</label>
+          <div class="type-toggle">
+            <div class="type-btn${(execHoje||base).tipo==='tubo'?' active':''}" onclick="setTipoCard('${ex.id}','tubo')" id="tbtn-tubo-${ex.id}">🔵 Tubo</div>
+            <div class="type-btn${(execHoje||base).tipo==='fita'?' active':''}" onclick="setTipoCard('${ex.id}','fita')" id="tbtn-fita-${ex.id}">📏 Fita</div>
+            <div class="type-btn${(execHoje||base).tipo==='ambos'?' active':''}" onclick="setTipoCard('${ex.id}','ambos')" id="tbtn-ambos-${ex.id}">🔀 Ambos</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Cores</label>
+          <div class="mini-color-grid" id="cg-${ex.id}">
+            ${['Amarelo','Verde','Vermelho','Azul','Preto','Laranja','Roxo'].map(c=>`
+              <div class="mini-chip${((execHoje||base).cores||[]).includes(c)?' selected':''}" style="background:${COR[c]}" data-cor="${c}" onclick="toggleCorCard('${ex.id}',this)"></div>
+            `).join('')}
+          </div>
+          <div class="color-labels" id="cl-${ex.id}">${renderCorTagsStr((execHoje||base).cores||[])}</div>
+        </div>
+        <div class="form-row"><label>Observações</label><textarea id="inp-obs-${ex.id}" placeholder="Como foi?">${(execHoje&&execHoje.obs)||''}</textarea></div>
+        ${executado
+          ? `<div style="display:flex;gap:8px">
+               <button class="btn btn-primary" style="flex:1" onclick="registrarExecucao('${ex.id}','${ex.nome}','${execHoje.id}')">ATUALIZAR</button>
+               <button class="btn-sm btn-danger" onclick="excluirExecucao('${execHoje.id}','${ex.id}')">🗑</button>
+             </div>`
+          : `<button class="btn btn-primary" onclick="registrarExecucao('${ex.id}','${ex.nome}',null)">REGISTRAR EXECUÇÃO</button>`
+        }
+        ${histHtml ? `<div class="hist-mini"><div class="hist-mini-title">Últimos registros</div>${histHtml}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleExecCard(exId) {
+  const body = document.getElementById('ebody-'+exId);
+  body.classList.toggle('open');
+}
+
+function setTipoCard(exId, t) {
+  ['tubo','fita','ambos'].forEach(x => document.getElementById(`tbtn-${x}-${exId}`).classList.toggle('active', x===t));
+}
+
+function toggleCorCard(exId, el) {
+  el.classList.toggle('selected');
+  const selecionadas = [...document.querySelectorAll(`#cg-${exId} .mini-chip.selected`)].map(e=>e.dataset.cor);
+  if (!selecionadas.length) { el.classList.add('selected'); return; }
+  document.getElementById('cl-'+exId).innerHTML = renderCorTagsStr(selecionadas);
+}
+
+function renderCorTagsStr(cores) {
+  return (cores||[]).map(c=>`<span class="color-tag"><span class="color-tag-dot" style="background:${COR[c]}"></span>${c}</span>`).join('');
+}
+
+function aplicarSugestao(exId, nome) {
+  // já está preenchido pelo valor padrão — só abre o card
+  document.getElementById('ebody-'+exId).classList.add('open');
+}
+
+async function registrarExecucao(exId, nome, execucaoIdExistente) {
+  const series = parseInt(document.getElementById('inp-series-'+exId).value);
+  const reps   = parseInt(document.getElementById('inp-reps-'+exId).value);
+  const obs    = document.getElementById('inp-obs-'+exId).value.trim();
+  const tipo   = (['tubo','fita','ambos'].find(t=>document.getElementById(`tbtn-${t}-${exId}`).classList.contains('active'))) || 'tubo';
+  const cores  = [...document.querySelectorAll(`#cg-${exId} .mini-chip.selected`)].map(e=>e.dataset.cor);
+
+  if (!series||!reps) { toast('⚠️ Informe séries e repetições', true); return; }
+  if (!cores.length) { toast('⚠️ Selecione ao menos uma cor', true); return; }
+
+  const payload = {
+    id: execucaoIdExistente || Date.now().toString(),
+    exercicioNome: nome,
+    diaTreino: diaSelecionado,
+    data: fmtShort(dataDia),
+    series, reps, tipo, cores, obs,
+    criadoEm: new Date().toISOString()
+  };
+
+  const btn = event.target;
+  btn.disabled=true; btn.textContent='SALVANDO…';
+
+  try {
+    if (execucaoIdExistente) {
+      await api('updateExecucao', payload);
+      const i = execucoes.findIndex(e=>e.id===execucaoIdExistente);
+      if (i!==-1) execucoes[i] = payload;
+    } else {
+      await api('saveExecucao', payload);
+      execucoes.push(payload);
+    }
+    ls(SK_EXEC, execucoes);
+    toast('✅ Execução registrada!');
+    renderHoje();
+  } catch(e) { toast('⚠️ Erro ao salvar', true); btn.disabled=false; btn.textContent=execucaoIdExistente?'ATUALIZAR':'REGISTRAR EXECUÇÃO'; }
+}
+
+async function excluirExecucao(execId, exId) {
+  if (!confirm('Excluir este registro?')) return;
+  try {
+    await api('deleteExecucao',{id:execId});
+    execucoes = execucoes.filter(e=>e.id!==execId);
+    ls(SK_EXEC, execucoes);
+    toast('🗑 Registro excluído');
+    renderHoje();
+  } catch(e) { toast('⚠️ Erro ao excluir',true); }
+}
+
+// ── EXERCÍCIOS (cadastro) ─────────────────────────────────
+function renderExercicios() {
+  const el = document.getElementById('lista-exercicios');
+  if (!exercicios.length) {
+    el.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>Nenhum exercício cadastrado</h3><p>Toque em "+ Novo" para começar</p></div>`;
+    return;
+  }
+  // agrupa por dia
+  const grupos = {};
+  exercicios.forEach(e=>{const k=e.diaTreino||'Sem dia';if(!grupos[k])grupos[k]=[];grupos[k].push(e);});
+  el.innerHTML = Object.entries(grupos).map(([dia,items])=>`
+    <div style="margin-bottom:16px">
+      <div style="font-family:'Bebas Neue',cursive;font-size:14px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)">${dia}</div>
+      ${items.map(ex=>{
+        const dots=(ex.cores||[]).map(c=>`<div class="edot" style="background:${COR[c]||'#888'}"></div>`).join('');
+        return `<div class="ex-item">
+          <div class="ex-item-left">
+            <div class="ex-item-nome">${ex.nome}</div>
+            <div class="ex-item-meta">
+              ${ex.grupo?`<span class="badge">${ex.grupo}</span>`:''}
+              <span class="badge badge-g">${ex.series}x${ex.reps}</span>
+              <div class="dots-row" style="margin:0">${dots}</div>
+            </div>
+          </div>
+          <div class="ex-item-actions">
+            <button class="btn-sm" style="background:var(--surface2);border:1px solid var(--border);color:var(--text)" onclick="editarExercicio('${ex.id}')">✏️</button>
+            <button class="btn-sm btn-danger" onclick="excluirExercicio('${ex.id}')">🗑</button>
+          </div>
+        </div>`;
+      }).join('')}
     </div>
   `).join('');
 }
 
-function entryHTML(t) {
-  const tl=t.tipo==='tubo'?'🔵 Tubo':t.tipo==='fita'?'📏 Fita':'🔀 Ambos';
-  const dots=(t.cores||[]).map(c=>`<div class="edot" style="background:${COR[c]||'#888'}"></div>`).join('');
-  return `<div class="log-entry">
-    <div class="entry-name">${t.nome}</div>
-    <div class="entry-meta">
-      ${t.grupo?`<span class="badge">${t.grupo}</span>`:''}
-      <span class="badge badge-g">${t.series}x${t.reps}</span>
-      <span class="badge badge-o">${tl}</span>
-    </div>
-    <div class="dots-row">${dots}<span style="font-size:12px;color:var(--muted);margin-left:3px">${(t.cores||[]).join(' + ')}</span></div>
-    ${t.obs?`<div style="font-size:12px;color:var(--muted);margin-top:5px">💬 ${t.obs}</div>`:''}
-    <div class="entry-actions">
-      <button class="btn btn-sm" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'DM Sans';font-size:13px" onclick="abrirModal('${t.id}')">✏️ Editar</button>
-      <button class="btn btn-danger btn-sm" onclick="deletar('${t.id}')">🗑 Excluir</button>
-    </div>
-  </div>`;
+// ── MODAL EXERCÍCIO ───────────────────────────────────────
+function abrirModalCadastro() {
+  editExId=null; tipoEx='tubo'; coresEx=['Amarelo'];
+  document.getElementById('modal-ex-title').textContent='Novo Exercício';
+  document.getElementById('ex-nome').readOnly=false;
+  document.getElementById('ex-nome-lock-hint').style.display='none';
+  ['ex-dia','ex-nome','ex-grupo','ex-series','ex-reps','ex-obs'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  document.getElementById('ex-grupo').value='';
+  setTipoEx('tubo');
+  document.querySelectorAll('#ex-color-grid .color-chip').forEach(el=>el.classList.toggle('selected',el.dataset.cor==='Amarelo'));
+  renderCorTagsEx();
+  document.getElementById('modal-ex').classList.add('open');
 }
+
+function editarExercicio(id) {
+  const ex=exercicios.find(e=>e.id===id); if(!ex) return;
+  editExId=id; tipoEx=ex.tipo||'tubo'; coresEx=[...(ex.cores||['Amarelo'])];
+  document.getElementById('modal-ex-title').textContent='Editar Exercício';
+  document.getElementById('ex-nome').value=ex.nome;
+  document.getElementById('ex-nome').readOnly=true;
+  document.getElementById('ex-nome-lock-hint').style.display='block';
+  document.getElementById('ex-dia').value=ex.diaTreino||'';
+  document.getElementById('ex-grupo').value=ex.grupo||'';
+  document.getElementById('ex-series').value=ex.series||'';
+  document.getElementById('ex-reps').value=ex.reps||'';
+  document.getElementById('ex-obs').value=ex.obs||'';
+  setTipoEx(tipoEx);
+  document.querySelectorAll('#ex-color-grid .color-chip').forEach(el=>el.classList.toggle('selected',coresEx.includes(el.dataset.cor)));
+  renderCorTagsEx();
+  document.getElementById('modal-ex').classList.add('open');
+}
+
+function fecharModalEx() { document.getElementById('modal-ex').classList.remove('open'); editExId=null; }
+
+function setTipoEx(t) {
+  tipoEx=t;
+  ['tubo','fita','ambos'].forEach(x=>document.getElementById('ex-btn-'+x).classList.toggle('active',x===t));
+}
+
+function toggleCorEx(el) {
+  const c=el.dataset.cor, i=coresEx.indexOf(c);
+  if(i===-1){coresEx.push(c);el.classList.add('selected');}
+  else{if(coresEx.length===1){toast('⚠️ Mínimo uma cor',true);return;}coresEx.splice(i,1);el.classList.remove('selected');}
+  renderCorTagsEx();
+}
+
+function renderCorTagsEx() {
+  document.getElementById('ex-color-labels').innerHTML=coresEx.map(c=>
+    `<span class="color-tag"><span class="color-tag-dot" style="background:${COR[c]}"></span>${c}</span>`
+  ).join('');
+}
+
+async function salvarExercicio() {
+  const diaTreino=document.getElementById('ex-dia').value.trim();
+  const nome=document.getElementById('ex-nome').value.trim();
+  const grupo=document.getElementById('ex-grupo').value;
+  const series=parseInt(document.getElementById('ex-series').value);
+  const reps=parseInt(document.getElementById('ex-reps').value);
+  const obs=document.getElementById('ex-obs').value.trim();
+
+  if(!diaTreino){toast('⚠️ Informe o dia de treino',true);return;}
+  if(!nome){toast('⚠️ Informe o nome',true);return;}
+  if(!series){toast('⚠️ Informe as séries',true);return;}
+  if(!reps){toast('⚠️ Informe as reps',true);return;}
+  if(!coresEx.length){toast('⚠️ Selecione ao menos uma cor',true);return;}
+
+  const btn=document.getElementById('btn-salvar-ex');
+  btn.disabled=true;btn.textContent='SALVANDO…';
+
+  try {
+    if (editExId) {
+      const payload={id:editExId,diaTreino,grupo,series,reps,tipo:tipoEx,cores:coresEx,obs};
+      await api('updateExercicio',payload);
+      const i=exercicios.findIndex(e=>e.id===editExId);
+      if(i!==-1) Object.assign(exercicios[i],payload);
+    } else {
+      const ex={id:Date.now().toString(),nome,diaTreino,grupo,series,reps,tipo:tipoEx,cores:coresEx,obs,criadoEm:new Date().toISOString()};
+      await api('saveExercicio',ex);
+      exercicios.push(ex);
+    }
+    ls(SK_EX,exercicios);
+    // atualiza dias conhecidos
+    const dExec=execucoes.map(e=>e.diaTreino).filter(Boolean);
+    diasConhecidos=[...new Set([...exercicios.map(e=>e.diaTreino).filter(Boolean),...dExec])];
+    ls(SK_DIAS,diasConhecidos);
+    fecharModalEx(); renderExercicios(); renderHoje();
+    toast(editExId?'✅ Exercício atualizado!':'✅ Exercício cadastrado!');
+  } catch(e){toast('⚠️ Erro ao salvar',true);}
+
+  btn.disabled=false;btn.textContent='SALVAR EXERCÍCIO';
+}
+
+async function excluirExercicio(id) {
+  if(!confirm('Excluir este exercício? Os registros de execução não serão apagados.')) return;
+  try {
+    await api('deleteExercicio',{id});
+    exercicios=exercicios.filter(e=>e.id!==id);
+    ls(SK_EX,exercicios);
+    renderExercicios(); renderHoje();
+    toast('🗑 Exercício excluído');
+  } catch(e){toast('⚠️ Erro ao excluir',true);}
+}
+
+// ── AUTOCOMPLETE ──────────────────────────────────────────
+function acDia(inputId, listId) {
+  const val=document.getElementById(inputId).value;
+  const sug=val?diasConhecidos.filter(d=>d.toLowerCase().includes(val.toLowerCase())):diasConhecidos;
+  const list=document.getElementById(listId);
+  if(!sug.length){list.classList.remove('open');return;}
+  list.innerHTML=sug.map(d=>`<div class="ac-item" onmousedown="selAc('${inputId}','${listId}','${d}')">${d}</div>`).join('');
+  list.classList.add('open');
+}
+function selAc(iId,lId,val){document.getElementById(iId).value=val;fecharAc(lId);}
+function fecharAc(lId){document.getElementById(lId).classList.remove('open');}
 
 // ── PROGRESSO ─────────────────────────────────────────────
 function updateFiltros() {
-  const dias=[...new Set(treinos.map(t=>t.diaTreino).filter(Boolean))].sort();
-  const nomes=[...new Set(treinos.map(t=>t.nome))].sort();
+  const dias=[...new Set(execucoes.map(e=>e.diaTreino).filter(Boolean))].sort();
+  const nomes=[...new Set(execucoes.map(e=>e.exercicioNome))].sort();
   const sd=document.getElementById('filtro-dia'),se=document.getElementById('filtro-ex');
   const cd=sd.value,ce=se.value;
   sd.innerHTML='<option value="">Todos</option>'+dias.map(d=>`<option value="${d}"${d===cd?' selected':''}>${d}</option>`).join('');
@@ -632,23 +890,24 @@ function renderProgresso() {
   updateFiltros();
   const fDia=document.getElementById('filtro-dia').value;
   const fEx=document.getElementById('filtro-ex').value;
-  let lista=[...treinos];
-  if(fDia) lista=lista.filter(t=>t.diaTreino===fDia);
-  if(fEx) lista=lista.filter(t=>t.nome===fEx);
+  let lista=[...execucoes];
+  if(fDia) lista=lista.filter(e=>e.diaTreino===fDia);
+  if(fEx)  lista=lista.filter(e=>e.exercicioNome===fEx);
   lista.sort((a,b)=>parseDate(a.data)-parseDate(b.data));
 
   if(!lista.length){
-    document.getElementById('lista-prog').innerHTML=`<div class="empty"><div class="empty-icon">📊</div><h3>Nenhum dado ainda</h3><p>Registre treinos para ver o progresso</p></div>`;
+    document.getElementById('lista-prog').innerHTML=`<div class="empty"><div class="empty-icon">📊</div><h3>Nenhuma execução registrada</h3><p>Registre treinos na aba Hoje para ver o progresso</p></div>`;
     return;
   }
 
   const byEx={};
-  lista.forEach(t=>{if(!byEx[t.nome])byEx[t.nome]=[];byEx[t.nome].push(t);});
+  lista.forEach(e=>{if(!byEx[e.exercicioNome])byEx[e.exercicioNome]=[];byEx[e.exercicioNome].push(e);});
+
   let html='';
   for(const [nome,logs] of Object.entries(byEx)){
     const sorted=[...logs].sort((a,b)=>parseDate(a.data)-parseDate(b.data));
     const last=sorted[sorted.length-1],prev=sorted[sorted.length-2];
-    const diasDoEx=[...new Set(sorted.map(t=>t.diaTreino).filter(Boolean))];
+    const dias=[...new Set(sorted.map(e=>e.diaTreino).filter(Boolean))];
     let trend='';
     if(prev){
       const cl=(+last.series)*(+last.reps)*(last.cores||[]).length;
@@ -657,60 +916,23 @@ function renderProgresso() {
     }
     html+=`<div class="prog-card">
       <div class="prog-name">${nome}${trend}</div>
-      ${diasDoEx.length?`<div class="prog-dia">📋 ${diasDoEx.join(' · ')}</div>`:''}
+      ${dias.length?`<div class="prog-sub">📋 ${dias.join(' · ')}</div>`:''}
       <div class="sec-hdr">Histórico de cargas</div>
-      ${sorted.slice().reverse().slice(0,10).map(t=>{
-        const dots=(t.cores||[]).map(c=>`<div class="hdot" style="background:${COR[c]||'#888'}"></div>`).join('');
-        const vol=(+t.series)*(+t.reps)*(t.cores||[]).length;
+      ${sorted.slice().reverse().slice(0,10).map(e=>{
+        const dots=(e.cores||[]).map(c=>`<div class="hdot" style="background:${COR[c]||'#888'}"></div>`).join('');
+        const vol=(+e.series)*(+e.reps)*(e.cores||[]).length;
         return `<div class="h-row">
-          <span class="h-date">${t.data}</span>
-          ${t.diaTreino?`<span class="h-dia">${t.diaTreino}</span>`:''}
-          <span class="badge">${t.series}x${t.reps}</span>
-          <div class="h-dots">${dots}</div>
-          <span style="font-size:11px;color:var(--muted)">${(t.cores||[]).join('+')||'-'}</span>
+          <span class="h-date">${e.data}</span>
+          ${e.diaTreino?`<span class="h-dia">${e.diaTreino}</span>`:''}
+          <span class="badge">${e.series}x${e.reps}</span>
+          <div class="hist-dots">${dots}</div>
+          <span style="font-size:11px;color:var(--muted)">${(e.cores||[]).join('+')||'-'}</span>
           <span class="h-vol">Vol:${vol}</span>
         </div>`;
       }).join('')}
     </div>`;
   }
   document.getElementById('lista-prog').innerHTML=html;
-}
-
-// ── EDITAR / EXCLUIR ──────────────────────────────────────
-function abrirModal(id){
-  editId=id;
-  const t=treinos.find(x=>x.id===id);if(!t)return;
-  document.getElementById('e-dia').value=t.diaTreino||'';
-  document.getElementById('e-series').value=t.series;
-  document.getElementById('e-reps').value=t.reps;
-  document.getElementById('e-obs').value=t.obs||'';
-  document.getElementById('modal-edit').classList.add('open');
-}
-function fecharModal(){document.getElementById('modal-edit').classList.remove('open');editId=null;}
-
-async function salvarEdicao(){
-  const btn=document.getElementById('btn-edit-save');
-  btn.disabled=true;
-  const payload={id:editId,diaTreino:document.getElementById('e-dia').value.trim(),series:parseInt(document.getElementById('e-series').value),reps:parseInt(document.getElementById('e-reps').value),obs:document.getElementById('e-obs').value.trim()};
-  try{
-    await api('update',payload);
-    const i=treinos.findIndex(x=>x.id===editId);
-    if(i!==-1)Object.assign(treinos[i],payload);
-    localStorage.setItem(STORAGE_CACHE,JSON.stringify(treinos));
-    adicionarDiaConhecido(payload.diaTreino);
-    fecharModal();renderHoje();updateFiltros();toast('✅ Editado!');
-  }catch(e){toast('⚠️ Erro ao editar',true);}
-  btn.disabled=false;
-}
-
-async function deletar(id){
-  if(!confirm('Excluir este exercício?'))return;
-  try{
-    await api('delete',{id});
-    treinos=treinos.filter(t=>t.id!==id);
-    localStorage.setItem(STORAGE_CACHE,JSON.stringify(treinos));
-    renderHoje();renderProgresso();toast('🗑 Excluído');
-  }catch(e){toast('⚠️ Erro ao excluir',true);}
 }
 
 // ── TOAST ─────────────────────────────────────────────────
@@ -721,7 +943,11 @@ function toast(msg,err=false){
   clearTimeout(tTimer);tTimer=setTimeout(()=>el.classList.remove('show'),2500);
 }
 
-document.getElementById('modal-edit').addEventListener('click',function(e){if(e.target===this)fecharModal();});
+// fecha modais clicando fora
+['modal-ex','modal-novo-dia'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+});
+
 init();
 </script>
 </body>
