@@ -10,7 +10,7 @@
     --bg:#0d0d0f;--surface:#16161a;--surface2:#1e1e24;--border:#2a2a33;
     --accent:#c8ff00;--accent2:#ff6b35;--text:#f0f0f5;--muted:#7a7a8c;--danger:#ff4757;--radius:16px;
     --c-amarelo:#ffd60a;--c-verde:#55c57a;--c-vermelho:#ff4757;--c-azul:#4fc3f7;
-    --c-preto:#666;--c-laranja:#ff6b35;--c-roxo:#9b59b6;
+    --c-preto:#444;--c-laranja:#ff6b35;--c-roxo:#9b59b6;--c-cinza:#9e9e9e;
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;font-size:15px;overscroll-behavior:none}
@@ -53,6 +53,17 @@
   .form-row{margin-bottom:13px}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 
+  /* Campo peso cinza */
+  .peso-cinza-wrap{display:none;margin-top:10px;animation:fadeIn .2s ease}
+  .peso-cinza-wrap.show{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+  .peso-cinza-inner{display:flex;align-items:center;gap:10px;background:rgba(158,158,158,.1);border:1px solid rgba(158,158,158,.3);border-radius:10px;padding:10px 13px}
+  .peso-cinza-icon{font-size:18px;flex-shrink:0}
+  .peso-cinza-label{font-size:12px;color:var(--c-cinza);font-weight:600;flex:1}
+  .peso-cinza-input{background:var(--bg);border:1px solid rgba(158,158,158,.4);border-radius:8px;padding:8px 10px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:90px;text-align:center;-webkit-appearance:none}
+  .peso-cinza-input:focus{border-color:var(--c-cinza)}
+  .peso-unit{font-size:12px;color:var(--muted);flex-shrink:0}
+
   /* Autocomplete */
   .ac-wrap{position:relative}
   .ac-list{position:absolute;top:100%;left:0;right:0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin-top:4px;z-index:60;overflow:hidden;display:none;max-height:180px;overflow-y:auto}
@@ -66,8 +77,10 @@
   .type-btn.active{background:var(--accent);color:#000}
 
   .color-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-  .color-chip{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;flex-shrink:0}
+  .color-chip{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;flex-shrink:0;position:relative}
   .color-chip.selected{border-color:var(--accent);transform:scale(1.15)}
+  /* Cinza tem borda interna para diferenciar do fundo escuro */
+  .color-chip[data-cor="Cinza"]{box-shadow:0 0 0 1px rgba(255,255,255,.15)}
   .color-labels{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
   .color-tag{display:flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:3px 9px 3px 5px;font-size:12px}
   .color-tag-dot{width:9px;height:9px;border-radius:50%}
@@ -81,12 +94,11 @@
   .btn-danger{background:transparent;border:1px solid var(--danger);color:var(--danger);font-size:13px;font-family:'DM Sans',sans-serif;padding:7px 12px;border-radius:8px}
   .btn-sm{width:auto;display:inline-block;padding:7px 14px;font-size:13px;border-radius:8px;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;font-weight:600}
 
-  /* ── HOJE ── */
+  /* HOJE */
   .date-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .date-arrow{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px}
   .date-label{font-family:'Bebas Neue',cursive;font-size:19px;letter-spacing:1px}
 
-  /* Seletor de dia de treino */
   .dia-selector{margin-bottom:14px}
   .dia-selector label{margin-bottom:8px}
   .dias-chips{display:flex;flex-wrap:wrap;gap:7px}
@@ -94,7 +106,6 @@
   .dia-chip.active{background:rgba(200,255,0,.15);border-color:var(--accent);color:var(--accent)}
   .dia-chip-new{border-style:dashed}
 
-  /* Card de execução */
   .exec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color .2s}
   .exec-card.executado{border-color:rgba(200,255,0,.3)}
   .exec-card-header{padding:13px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:10px}
@@ -104,34 +115,39 @@
   .exec-status{display:flex;align-items:center;gap:6px;flex-shrink:0}
   .status-dot{width:9px;height:9px;border-radius:50%;background:var(--border)}
   .status-dot.ok{background:var(--accent)}
-  .exec-summary{font-size:12px;color:var(--muted);text-align:right;line-height:1.4}
+  .exec-summary{font-size:12px;color:var(--muted);text-align:right;line-height:1.5}
   .exec-body{padding:0 14px 14px;border-top:1px solid var(--border);display:none}
   .exec-body.open{display:block;padding-top:14px}
 
-  /* Mini color chips dentro do card */
   .mini-color-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
   .mini-chip{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
   .mini-chip.selected{border-color:var(--accent);transform:scale(1.12)}
+  .mini-chip[data-cor="Cinza"]{box-shadow:0 0 0 1px rgba(255,255,255,.15)}
 
-  /* Sugestão */
+  /* Peso cinza dentro do card de execução */
+  .peso-exec-wrap{display:none;margin-top:8px}
+  .peso-exec-wrap.show{display:block}
+  .peso-exec-inner{display:flex;align-items:center;gap:10px;background:rgba(158,158,158,.08);border:1px solid rgba(158,158,158,.25);border-radius:10px;padding:9px 12px}
+  .peso-exec-label{font-size:12px;color:var(--c-cinza);font-weight:600;flex:1}
+  .peso-exec-input{background:var(--bg);border:1px solid rgba(158,158,158,.4);border-radius:8px;padding:7px 10px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:80px;text-align:center;-webkit-appearance:none}
+  .peso-exec-input:focus{border-color:var(--c-cinza)}
+
   .sugestao-bar{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin-bottom:12px;gap:8px}
-  .sugestao-txt{font-size:12px;color:var(--muted);line-height:1.4;flex:1}
+  .sugestao-txt{font-size:12px;color:var(--muted);line-height:1.5;flex:1}
   .sugestao-txt strong{color:var(--text)}
   .btn-aplicar{background:rgba(200,255,0,.15);border:1px solid rgba(200,255,0,.3);color:var(--accent);font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif}
 
-  /* Dots decorativos */
   .dots-row{display:flex;gap:4px;align-items:center;margin-top:6px}
   .edot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
 
-  /* Histórico de cargas no card */
   .hist-mini{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
   .hist-mini-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:6px}
-  .hist-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);padding:3px 0}
+  .hist-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);padding:3px 0;flex-wrap:wrap}
   .hist-dots{display:flex;gap:2px}
   .hdot{width:7px;height:7px;border-radius:50%;border:1px solid rgba(255,255,255,.1)}
   .hist-vol{margin-left:auto;color:var(--accent);font-weight:700;font-size:11px}
+  .hist-peso{color:var(--c-cinza);font-size:10px;background:rgba(158,158,158,.1);border-radius:4px;padding:1px 5px}
 
-  /* Progresso */
   .prog-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px;margin-bottom:11px}
   .prog-name{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
   .prog-sub{font-size:12px;color:var(--muted);margin-bottom:11px}
@@ -140,23 +156,22 @@
   .trend-same{background:rgba(122,122,140,.15);color:var(--muted)}
   .trend-down{background:rgba(255,71,87,.1);color:var(--danger)}
   .sec-hdr{font-family:'Bebas Neue',cursive;font-size:12px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-  .h-row{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .h-row{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
   .h-row:last-child{border-bottom:none}
   .h-date{color:var(--muted);font-size:11px;min-width:65px}
   .h-dia{font-size:11px;color:var(--accent);background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);border-radius:5px;padding:1px 6px}
   .badge{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 7px;font-size:12px;font-weight:500;color:var(--muted)}
   .badge-g{background:rgba(200,255,0,.1);border-color:rgba(200,255,0,.25);color:var(--accent)}
   .h-vol{margin-left:auto;font-weight:700;font-size:12px;color:var(--accent)}
+  .h-peso{color:var(--c-cinza);font-size:11px;background:rgba(158,158,158,.1);border:1px solid rgba(158,158,158,.2);border-radius:4px;padding:1px 6px}
   .filter-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-  /* Exercícios cadastrados */
   .ex-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px;margin-bottom:9px;display:flex;align-items:center;gap:12px}
   .ex-item-left{flex:1;min-width:0}
   .ex-item-nome{font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:1px}
   .ex-item-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;align-items:center}
   .ex-item-actions{display:flex;gap:6px;flex-shrink:0}
 
-  /* Config */
   .config-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
   .config-item-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
   .config-item-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:12px}
@@ -210,7 +225,7 @@
 <div id="app-screen">
   <header>
     <div><h1>⚡ ElasticFit</h1><p>Controle de Treino com Elásticos</p></div>
-    <div class="sync-pill" onclick="sincronizar()" title="Sincronizar">
+    <div class="sync-pill" onclick="sincronizar()">
       <div class="sync-dot" id="sync-dot"></div>
       <span id="sync-lbl">Sheets</span>
     </div>
@@ -224,24 +239,21 @@
     <div class="nav-tab" onclick="showPage('config')">⚙️ Config</div>
   </nav>
 
-  <!-- ── HOJE ── -->
+  <!-- HOJE -->
   <div class="page active" id="page-hoje">
     <div class="date-bar">
       <div class="date-arrow" onclick="mudarDia(-1)">‹</div>
       <div class="date-label" id="label-dia"></div>
       <div class="date-arrow" onclick="mudarDia(1)">›</div>
     </div>
-
-    <!-- Seletor de dia de treino -->
     <div class="dia-selector">
       <label>Dia de Treino</label>
       <div class="dias-chips" id="dias-chips"></div>
     </div>
-
     <div id="exec-lista"></div>
   </div>
 
-  <!-- ── EXERCÍCIOS (cadastro) ── -->
+  <!-- EXERCÍCIOS -->
   <div class="page" id="page-exercicios">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
       <span style="font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:1px">Exercícios Cadastrados</span>
@@ -250,7 +262,7 @@
     <div id="lista-exercicios"></div>
   </div>
 
-  <!-- ── PROGRESSO ── -->
+  <!-- PROGRESSO -->
   <div class="page" id="page-progresso">
     <div class="card" style="margin-bottom:11px">
       <div class="card-title">Histórico por Exercício</div>
@@ -262,7 +274,7 @@
     <div id="lista-prog"></div>
   </div>
 
-  <!-- ── CONFIG ── -->
+  <!-- CONFIG -->
   <div class="page" id="page-config">
     <div class="config-item">
       <div class="config-item-title">🔗 URL do Google Apps Script</div>
@@ -294,7 +306,7 @@
   </div>
 </div>
 
-<!-- MODAL CADASTRO / EDIÇÃO DE EXERCÍCIO -->
+<!-- MODAL EXERCÍCIO -->
 <div class="modal-overlay" id="modal-ex">
   <div class="modal">
     <div class="modal-hdr">
@@ -302,16 +314,17 @@
       <button class="modal-close" onclick="fecharModalEx()">✕</button>
     </div>
     <div class="form-row">
-      <label>Dia de Treino <span style="color:var(--muted);font-weight:400">(ex: Treino A, Pernas)</span></label>
+      <label>Dia de Treino</label>
       <div class="ac-wrap">
-        <input type="text" id="ex-dia" placeholder="Nome do treino..." autocomplete="off" oninput="acDia('ex-dia','ac-ex-dia')" onfocus="acDia('ex-dia','ac-ex-dia')" onblur="setTimeout(()=>fecharAc('ac-ex-dia'),200)">
+        <input type="text" id="ex-dia" placeholder="Ex: Treino A, Pernas..." autocomplete="off"
+          oninput="acDia('ex-dia','ac-ex-dia')" onfocus="acDia('ex-dia','ac-ex-dia')" onblur="setTimeout(()=>fecharAc('ac-ex-dia'),200)">
         <div class="ac-list" id="ac-ex-dia"></div>
       </div>
     </div>
     <div class="form-row">
       <label>Nome do Exercício</label>
       <input type="text" id="ex-nome" placeholder="Ex: Rosca Bíceps...">
-      <div id="ex-nome-lock-hint" style="display:none;font-size:11px;color:var(--muted);margin-top:5px">🔒 O nome não pode ser alterado (é a chave do exercício)</div>
+      <div id="ex-nome-lock-hint" style="display:none;font-size:11px;color:var(--muted);margin-top:5px">🔒 O nome não pode ser alterado (chave do exercício)</div>
     </div>
     <div class="form-row"><label>Grupo Muscular</label>
       <select id="ex-grupo">
@@ -342,15 +355,25 @@
         <div class="color-chip" style="background:var(--c-preto)" data-cor="Preto" onclick="toggleCorEx(this)"></div>
         <div class="color-chip" style="background:var(--c-laranja)" data-cor="Laranja" onclick="toggleCorEx(this)"></div>
         <div class="color-chip" style="background:var(--c-roxo)" data-cor="Roxo" onclick="toggleCorEx(this)"></div>
+        <div class="color-chip" style="background:var(--c-cinza)" data-cor="Cinza" onclick="toggleCorEx(this)"></div>
       </div>
       <div class="color-labels" id="ex-color-labels"></div>
+      <!-- Campo peso cinza no modal de cadastro -->
+      <div class="peso-cinza-wrap" id="ex-peso-wrap">
+        <div class="peso-cinza-inner">
+          <span class="peso-cinza-icon">⚖️</span>
+          <span class="peso-cinza-label">Peso padrão do elástico cinza</span>
+          <input type="number" class="peso-cinza-input" id="ex-peso-cinza" placeholder="0" min="0" step="0.5">
+          <span class="peso-unit">kg</span>
+        </div>
+      </div>
     </div>
-    <div class="form-row"><label>Observações</label><textarea id="ex-obs" placeholder="Notas gerais sobre o exercício..."></textarea></div>
+    <div class="form-row"><label>Observações</label><textarea id="ex-obs" placeholder="Notas gerais..."></textarea></div>
     <button class="btn btn-primary" id="btn-salvar-ex" onclick="salvarExercicio()">SALVAR EXERCÍCIO</button>
   </div>
 </div>
 
-<!-- MODAL NOVO DIA DE TREINO (na aba Hoje) -->
+<!-- MODAL NOVO DIA -->
 <div class="modal-overlay" id="modal-novo-dia">
   <div class="modal">
     <div class="modal-hdr">
@@ -360,7 +383,8 @@
     <div class="form-row">
       <label>Nome do dia</label>
       <div class="ac-wrap">
-        <input type="text" id="novo-dia-input" placeholder="Ex: Treino A, Pernas, Segunda..." autocomplete="off" oninput="acDia('novo-dia-input','ac-novo-dia')" onfocus="acDia('novo-dia-input','ac-novo-dia')" onblur="setTimeout(()=>fecharAc('ac-novo-dia'),200)">
+        <input type="text" id="novo-dia-input" placeholder="Ex: Treino A, Pernas, Segunda..." autocomplete="off"
+          oninput="acDia('novo-dia-input','ac-novo-dia')" onfocus="acDia('novo-dia-input','ac-novo-dia')" onblur="setTimeout(()=>fecharAc('ac-novo-dia'),200)">
         <div class="ac-list" id="ac-novo-dia"></div>
       </div>
     </div>
@@ -371,63 +395,50 @@
 <div id="toast"></div>
 
 <script>
-// ── ESTADO ────────────────────────────────────────────────
 const SK_URL  = 'ef_url';
 const SK_EX   = 'ef_exercicios';
 const SK_EXEC = 'ef_execucoes';
 const SK_DIAS = 'ef_dias';
 
+const CORES_DEF = ['Amarelo','Verde','Vermelho','Azul','Preto','Laranja','Roxo','Cinza'];
 const COR = {
   Amarelo:'var(--c-amarelo)',Verde:'var(--c-verde)',Vermelho:'var(--c-vermelho)',
-  Azul:'var(--c-azul)',Preto:'var(--c-preto)',Laranja:'var(--c-laranja)',Roxo:'var(--c-roxo)'
+  Azul:'var(--c-azul)',Preto:'var(--c-preto)',Laranja:'var(--c-laranja)',
+  Roxo:'var(--c-roxo)',Cinza:'var(--c-cinza)'
 };
 
-let apiUrl      = localStorage.getItem(SK_URL) || '';
-let exercicios  = [];   // cadastro
-let execucoes   = [];   // registros diários
-let diasConhecidos = [];
-
-let dataDia     = new Date();
-let diaSelecionado = '';
-
-// estado do modal de exercício
-let editExId    = null;
-let tipoEx      = 'tubo';
-let coresEx     = ['Amarelo'];
+let apiUrl = localStorage.getItem(SK_URL) || '';
+let exercicios = [], execucoes = [], diasConhecidos = [];
+let dataDia = new Date(), diaSelecionado = '';
+let editExId = null, tipoEx = 'tubo', coresEx = ['Amarelo'];
 
 // ── INIT ──────────────────────────────────────────────────
 function init() {
   if (apiUrl) mostrarApp();
   atualizarLabelDia();
-  const dc = ls(SK_DIAS); if (dc) diasConhecidos = dc;
+  const dc = lsGet(SK_DIAS); if (dc) diasConhecidos = dc;
 }
 
-function ls(k, v) {
-  if (v !== undefined) { localStorage.setItem(k, JSON.stringify(v)); return; }
-  try { return JSON.parse(localStorage.getItem(k)) || []; } catch(e) { return []; }
-}
+function lsGet(k) { try { return JSON.parse(localStorage.getItem(k)) || []; } catch(e) { return []; } }
+function lsSet(k,v) { localStorage.setItem(k, JSON.stringify(v)); }
 
 function conectar() {
   const url = document.getElementById('api-url-input').value.trim();
   if (!url.includes('script.google.com')) { toast('⚠️ URL inválida', true); return; }
-  apiUrl = url; localStorage.setItem(SK_URL, url);
-  mostrarApp();
+  apiUrl = url; localStorage.setItem(SK_URL, url); mostrarApp();
 }
 
 function mostrarApp() {
   document.getElementById('setup-screen').style.display = 'none';
   document.getElementById('app-screen').style.display = 'block';
-  exercicios = ls(SK_EX); execucoes = ls(SK_EXEC);
-  atualizarUrlDisplay();
-  sincronizar();
+  exercicios = lsGet(SK_EX); execucoes = lsGet(SK_EXEC);
+  atualizarUrlDisplay(); sincronizar();
 }
 
 // ── CONFIG ────────────────────────────────────────────────
 function atualizarUrlDisplay() {
-  const el = document.getElementById('url-display');
-  if (!el) return;
-  el.innerHTML = apiUrl
-    ? `<span style="color:var(--accent)">${apiUrl.substring(0,60)}…</span>`
+  const el = document.getElementById('url-display'); if (!el) return;
+  el.innerHTML = apiUrl ? `<span style="color:var(--accent)">${apiUrl.substring(0,60)}…</span>`
     : '<span style="color:var(--danger)">Nenhuma URL configurada</span>';
 }
 function salvarNovaUrl() {
@@ -453,12 +464,10 @@ function desconectar() {
 
 // ── API ───────────────────────────────────────────────────
 function setSync(s) {
-  const dot = document.getElementById('sync-dot');
-  const lbl = document.getElementById('sync-lbl');
+  const dot = document.getElementById('sync-dot'), lbl = document.getElementById('sync-lbl');
   dot.className = 'sync-dot'+(s==='sync'?' syncing':s==='error'?' error':'');
   lbl.textContent = s==='sync'?'Salvando…':s==='error'?'Erro':'Sheets ✓';
 }
-
 async function api(action, payload) {
   setSync('sync');
   const p = new URLSearchParams({ action });
@@ -476,21 +485,17 @@ async function api(action, payload) {
     throw err;
   }
 }
-
 async function sincronizar() {
   try {
     const [re, rx] = await Promise.all([api('getExercicios'), api('getExecucoes')]);
-    exercicios = re.exercicios || []; ls(SK_EX, exercicios);
-    execucoes  = rx.execucoes  || []; ls(SK_EXEC, execucoes);
-    // atualiza dias conhecidos
-    const dEx   = exercicios.map(e => e.diaTreino).filter(Boolean);
-    const dExec = execucoes.map(e => e.diaTreino).filter(Boolean);
-    diasConhecidos = [...new Set([...dEx, ...dExec])];
-    ls(SK_DIAS, diasConhecidos);
+    exercicios = re.exercicios || []; lsSet(SK_EX, exercicios);
+    execucoes  = rx.execucoes  || []; lsSet(SK_EXEC, execucoes);
+    diasConhecidos = [...new Set([
+      ...exercicios.map(e=>e.diaTreino), ...execucoes.map(e=>e.diaTreino)
+    ].filter(Boolean))];
+    lsSet(SK_DIAS, diasConhecidos);
     renderHoje(); renderExercicios(); updateFiltros();
-  } catch(e) {
-    renderHoje(); renderExercicios(); updateFiltros();
-  }
+  } catch(e) { renderHoje(); renderExercicios(); updateFiltros(); }
 }
 
 // ── HELPERS ───────────────────────────────────────────────
@@ -498,248 +503,226 @@ function hojeFmt() { return new Date().toLocaleDateString('pt-BR',{day:'2-digit'
 function fmtDate(d) { return d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short',year:'numeric'}); }
 function fmtShort(d) { return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
 function parseDate(s) { const [d,m,y]=s.split('/'); return new Date(+y,+m-1,+d); }
-
-function atualizarLabelDia() {
-  const el = document.getElementById('label-dia');
-  if (el) el.textContent = fmtDate(dataDia).toUpperCase();
-}
+function atualizarLabelDia() { const el=document.getElementById('label-dia'); if(el) el.textContent=fmtDate(dataDia).toUpperCase(); }
+function temCinza(cores) { return (cores||[]).includes('Cinza'); }
 
 // ── NAVEGAÇÃO ─────────────────────────────────────────────
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  ['hoje','exercicios','progresso','config'].forEach((p,i)=>{
-    if(p===id) document.querySelectorAll('.nav-tab')[i].classList.add('active');
-  });
+  ['hoje','exercicios','progresso','config'].forEach((p,i)=>{ if(p===id) document.querySelectorAll('.nav-tab')[i].classList.add('active'); });
   if(id==='hoje') renderHoje();
   if(id==='exercicios') renderExercicios();
   if(id==='progresso') renderProgresso();
   if(id==='config') atualizarUrlDisplay();
 }
 
-// ── DIA DE TREINO (chips na aba Hoje) ─────────────────────
+// ── DIA DE TREINO ─────────────────────────────────────────
 function mudarDia(d) { dataDia=new Date(dataDia); dataDia.setDate(dataDia.getDate()+d); atualizarLabelDia(); renderHoje(); }
 
 function renderDiasChips() {
   const wrap = document.getElementById('dias-chips');
-  // dias disponíveis = dias dos exercícios cadastrados
   const dias = [...new Set(exercicios.map(e=>e.diaTreino).filter(Boolean))].sort();
-  let html = dias.map(d => `
+  wrap.innerHTML = dias.map(d=>`
     <div class="dia-chip${d===diaSelecionado?' active':''}" onclick="selecionarDia('${d}')">${d}</div>
-  `).join('');
-  html += `<div class="dia-chip dia-chip-new" onclick="abrirModalNovoDia()">+ outro</div>`;
-  wrap.innerHTML = html;
+  `).join('') + `<div class="dia-chip dia-chip-new" onclick="abrirModalNovoDia()">+ outro</div>`;
 }
-
-function selecionarDia(d) {
-  diaSelecionado = d;
-  renderHoje();
-}
-
-function abrirModalNovoDia() {
-  document.getElementById('novo-dia-input').value = '';
-  document.getElementById('modal-novo-dia').classList.add('open');
-}
+function selecionarDia(d) { diaSelecionado=d; renderHoje(); }
+function abrirModalNovoDia() { document.getElementById('novo-dia-input').value=''; document.getElementById('modal-novo-dia').classList.add('open'); }
 function fecharModalNovoDia() { document.getElementById('modal-novo-dia').classList.remove('open'); }
 function confirmarNovoDia() {
-  const v = document.getElementById('novo-dia-input').value.trim();
-  if (!v) { toast('⚠️ Digite o nome do treino', true); return; }
-  diaSelecionado = v;
-  fecharModalNovoDia();
-  renderHoje();
+  const v=document.getElementById('novo-dia-input').value.trim();
+  if(!v){toast('⚠️ Digite o nome',true);return;}
+  diaSelecionado=v; fecharModalNovoDia(); renderHoje();
 }
 
 // ── HOJE ──────────────────────────────────────────────────
 function renderHoje() {
-  atualizarLabelDia();
-  renderDiasChips();
+  atualizarLabelDia(); renderDiasChips();
   const container = document.getElementById('exec-lista');
-
   if (!diaSelecionado) {
-    container.innerHTML = `<div class="empty"><div class="empty-icon">👆</div><h3>Selecione o dia de treino</h3><p>Escolha ou crie um dia de treino acima</p></div>`;
+    container.innerHTML=`<div class="empty"><div class="empty-icon">👆</div><h3>Selecione o dia de treino</h3><p>Escolha um dia acima para ver os exercícios</p></div>`;
     return;
   }
-
-  // exercícios deste dia de treino
-  const exDoDia = exercicios.filter(e => e.diaTreino === diaSelecionado);
+  const exDoDia = exercicios.filter(e=>e.diaTreino===diaSelecionado);
   if (!exDoDia.length) {
-    container.innerHTML = `<div class="empty"><div class="empty-icon">🏋️</div><h3>Nenhum exercício neste dia</h3><p>Cadastre exercícios na aba Exercícios e associe ao dia <strong>${diaSelecionado}</strong></p></div>`;
+    container.innerHTML=`<div class="empty"><div class="empty-icon">🏋️</div><h3>Nenhum exercício neste dia</h3><p>Cadastre exercícios associados ao dia <strong>${diaSelecionado}</strong></p></div>`;
     return;
   }
-
   const dataStr = fmtShort(dataDia);
+  container.innerHTML = exDoDia.map(ex => buildExecCard(ex, dataStr)).join('');
+}
 
-  container.innerHTML = exDoDia.map(ex => {
-    // execução de hoje para este exercício
-    const execHoje = execucoes.find(e => e.exercicioNome===ex.nome && e.data===dataStr && e.diaTreino===diaSelecionado);
-    // último registro anterior (para sugestão)
-    const historico = execucoes
-      .filter(e => e.exercicioNome===ex.nome && e.diaTreino===diaSelecionado && e.data!==dataStr)
-      .sort((a,b) => parseDate(b.data)-parseDate(a.data));
-    const ultimo = historico[0];
+function buildExecCard(ex, dataStr) {
+  const execHoje = execucoes.find(e=>e.exercicioNome===ex.nome && e.data===dataStr && e.diaTreino===diaSelecionado);
+  const historico = execucoes
+    .filter(e=>e.exercicioNome===ex.nome && e.diaTreino===diaSelecionado && e.data!==dataStr)
+    .sort((a,b)=>parseDate(b.data)-parseDate(a.data));
+  const ultimo = historico[0];
+  const base = execHoje || ultimo || ex;
+  const executado = !!execHoje;
+  const hasCinza = temCinza(base.cores);
 
-    // dados sugeridos: se tem execução de hoje usa ela, senão usa último, senão usa cadastro
-    const base = execHoje || ultimo || ex;
-    const executado = !!execHoje;
+  const miniChips = CORES_DEF.map(c=>`
+    <div class="mini-chip${(base.cores||[]).includes(c)?' selected':''}" style="background:${COR[c]}" data-cor="${c}" onclick="toggleCorCard('${ex.id}',this)"></div>
+  `).join('');
 
-    const dots = (base.cores||[]).map(c=>`<div class="edot" style="background:${COR[c]||'#888'}"></div>`).join('');
-    const tipoLabel = base.tipo==='tubo'?'🔵 Tubo':base.tipo==='fita'?'📏 Fita':'🔀 Ambos';
+  const sumario = executado
+    ? `${execHoje.series}x${execHoje.reps}${execHoje.pesoCinza?` · ⚖️${execHoje.pesoCinza}kg`:''}<br><span style="font-size:10px">${(execHoje.cores||[]).join('+')}</span>`
+    : '';
 
-    // mini histórico (últimas 3 execuções)
-    const histHtml = historico.slice(0,3).map(h => {
-      const hd = (h.cores||[]).map(c=>`<div class="hdot" style="background:${COR[c]||'#888'}"></div>`).join('');
-      const vol = (+h.series)*(+h.reps)*(h.cores||[]).length;
-      return `<div class="hist-row">
-        <span class="h-date">${h.data}</span>
-        <span>${h.series}x${h.reps}</span>
-        <div class="hist-dots">${hd}</div>
-        <span>${(h.cores||[]).join('+')}</span>
-        <span class="hist-vol">Vol:${vol}</span>
-      </div>`;
-    }).join('');
+  // sugestão
+  let sugestaoHtml = '';
+  if (!executado) {
+    const src = ultimo || ex;
+    const pesotxt = temCinza(src.cores) && src.pesoCinza ? ` · ⚖️${src.pesoCinza}kg` : '';
+    const label = ultimo ? `Último (${ultimo.data})` : 'Padrão do cadastro';
+    sugestaoHtml = `<div class="sugestao-bar">
+      <div class="sugestao-txt">${label}: <strong>${src.series}x${src.reps}</strong> · ${(src.cores||[]).join('+')}${pesotxt}</div>
+      <button class="btn-aplicar" onclick="aplicarSugestao('${ex.id}')">Usar este</button>
+    </div>`;
+  }
 
-    return `<div class="exec-card${executado?' executado':''}" id="ecard-${ex.id}">
-      <div class="exec-card-header" onclick="toggleExecCard('${ex.id}')">
-        <div class="exec-card-left">
-          <div class="exec-nome">${ex.nome}</div>
-          <div class="exec-grupo">${ex.grupo||''}</div>
-        </div>
-        <div class="exec-status">
-          ${executado ? `<div class="exec-summary">${execHoje.series}x${execHoje.reps}<br><span style="font-size:10px">${(execHoje.cores||[]).join('+')}</span></div>` : ''}
-          <div class="status-dot${executado?' ok':''}"></div>
-        </div>
-      </div>
-      <div class="exec-body" id="ebody-${ex.id}">
-        ${!executado && ultimo ? `
-        <div class="sugestao-bar">
-          <div class="sugestao-txt">Último: <strong>${ultimo.series}x${ultimo.reps}</strong> · ${(ultimo.cores||[]).join('+')} · ${ultimo.data}</div>
-          <button class="btn-aplicar" onclick="aplicarSugestao('${ex.id}','${ex.nome}')">Usar este</button>
-        </div>` : ''}
-        ${!executado && !ultimo ? `<div class="sugestao-bar"><div class="sugestao-txt">Sugestão do cadastro: <strong>${ex.series}x${ex.reps}</strong> · ${(ex.cores||[]).join('+')||'—'}</div><button class="btn-aplicar" onclick="aplicarSugestao('${ex.id}','${ex.nome}')">Usar este</button></div>` : ''}
-
-        <div class="form-grid form-row">
-          <div><label>Séries</label><input type="number" id="inp-series-${ex.id}" value="${(execHoje||base).series||''}" min="1" max="20"></div>
-          <div><label>Reps</label><input type="number" id="inp-reps-${ex.id}" value="${(execHoje||base).reps||''}" min="1" max="200"></div>
-        </div>
-        <div class="form-row"><label>Tipo de Elástico</label>
-          <div class="type-toggle">
-            <div class="type-btn${(execHoje||base).tipo==='tubo'?' active':''}" onclick="setTipoCard('${ex.id}','tubo')" id="tbtn-tubo-${ex.id}">🔵 Tubo</div>
-            <div class="type-btn${(execHoje||base).tipo==='fita'?' active':''}" onclick="setTipoCard('${ex.id}','fita')" id="tbtn-fita-${ex.id}">📏 Fita</div>
-            <div class="type-btn${(execHoje||base).tipo==='ambos'?' active':''}" onclick="setTipoCard('${ex.id}','ambos')" id="tbtn-ambos-${ex.id}">🔀 Ambos</div>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Cores</label>
-          <div class="mini-color-grid" id="cg-${ex.id}">
-            ${['Amarelo','Verde','Vermelho','Azul','Preto','Laranja','Roxo'].map(c=>`
-              <div class="mini-chip${((execHoje||base).cores||[]).includes(c)?' selected':''}" style="background:${COR[c]}" data-cor="${c}" onclick="toggleCorCard('${ex.id}',this)"></div>
-            `).join('')}
-          </div>
-          <div class="color-labels" id="cl-${ex.id}">${renderCorTagsStr((execHoje||base).cores||[])}</div>
-        </div>
-        <div class="form-row"><label>Observações</label><textarea id="inp-obs-${ex.id}" placeholder="Como foi?">${(execHoje&&execHoje.obs)||''}</textarea></div>
-        ${executado
-          ? `<div style="display:flex;gap:8px">
-               <button class="btn btn-primary" style="flex:1" onclick="registrarExecucao('${ex.id}','${ex.nome}','${execHoje.id}')">ATUALIZAR</button>
-               <button class="btn-sm btn-danger" onclick="excluirExecucao('${execHoje.id}','${ex.id}')">🗑</button>
-             </div>`
-          : `<button class="btn btn-primary" onclick="registrarExecucao('${ex.id}','${ex.nome}',null)">REGISTRAR EXECUÇÃO</button>`
-        }
-        ${histHtml ? `<div class="hist-mini"><div class="hist-mini-title">Últimos registros</div>${histHtml}</div>` : ''}
-      </div>
+  // mini histórico
+  const histHtml = historico.slice(0,3).map(h=>{
+    const hd=(h.cores||[]).map(c=>`<div class="hdot" style="background:${COR[c]||'#888'}"></div>`).join('');
+    const vol=(+h.series)*(+h.reps)*(h.cores||[]).length;
+    const pesoTag = h.pesoCinza ? `<span class="hist-peso">⚖️${h.pesoCinza}kg</span>` : '';
+    return `<div class="hist-row">
+      <span class="h-date">${h.data}</span>
+      <span>${h.series}x${h.reps}</span>
+      <div class="hist-dots">${hd}</div>
+      ${pesoTag}
+      <span class="hist-vol">Vol:${vol}</span>
     </div>`;
   }).join('');
+
+  const tipoAtivo = t => (base.tipo||'tubo')===t?' active':'';
+
+  return `<div class="exec-card${executado?' executado':''}" id="ecard-${ex.id}">
+    <div class="exec-card-header" onclick="toggleExecCard('${ex.id}')">
+      <div class="exec-card-left">
+        <div class="exec-nome">${ex.nome}</div>
+        <div class="exec-grupo">${ex.grupo||''}</div>
+      </div>
+      <div class="exec-status">
+        ${executado?`<div class="exec-summary">${sumario}</div>`:''}
+        <div class="status-dot${executado?' ok':''}"></div>
+      </div>
+    </div>
+    <div class="exec-body" id="ebody-${ex.id}">
+      ${sugestaoHtml}
+      <div class="form-grid form-row">
+        <div><label>Séries</label><input type="number" id="inp-series-${ex.id}" value="${(execHoje||base).series||''}" min="1" max="20"></div>
+        <div><label>Reps</label><input type="number" id="inp-reps-${ex.id}" value="${(execHoje||base).reps||''}" min="1" max="200"></div>
+      </div>
+      <div class="form-row"><label>Tipo de Elástico</label>
+        <div class="type-toggle">
+          <div class="type-btn${tipoAtivo('tubo')}" onclick="setTipoCard('${ex.id}','tubo')" id="tbtn-tubo-${ex.id}">🔵 Tubo</div>
+          <div class="type-btn${tipoAtivo('fita')}" onclick="setTipoCard('${ex.id}','fita')" id="tbtn-fita-${ex.id}">📏 Fita</div>
+          <div class="type-btn${tipoAtivo('ambos')}" onclick="setTipoCard('${ex.id}','ambos')" id="tbtn-ambos-${ex.id}">🔀 Ambos</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Cores</label>
+        <div class="mini-color-grid" id="cg-${ex.id}">${miniChips}</div>
+        <div class="color-labels" id="cl-${ex.id}">${renderCorTagsStr(base.cores||[])}</div>
+        <!-- Campo peso cinza na execução -->
+        <div class="peso-exec-wrap${hasCinza?' show':''}" id="pw-${ex.id}">
+          <div class="peso-exec-inner">
+            <span class="peso-exec-label">⚖️ Peso do elástico cinza</span>
+            <input type="number" class="peso-exec-input" id="inp-peso-${ex.id}" value="${(execHoje||base).pesoCinza||''}" placeholder="0" min="0" step="0.5">
+            <span class="peso-unit">kg</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-row"><label>Observações</label><textarea id="inp-obs-${ex.id}" placeholder="Como foi?">${(execHoje&&execHoje.obs)||''}</textarea></div>
+      ${executado
+        ? `<div style="display:flex;gap:8px">
+             <button class="btn btn-primary" style="flex:1" onclick="registrarExecucao('${ex.id}','${ex.nome}','${execHoje.id}')">ATUALIZAR</button>
+             <button class="btn-sm btn-danger" onclick="excluirExecucao('${execHoje.id}','${ex.id}')">🗑</button>
+           </div>`
+        : `<button class="btn btn-primary" onclick="registrarExecucao('${ex.id}','${ex.nome}',null)">REGISTRAR EXECUÇÃO</button>`
+      }
+      ${histHtml?`<div class="hist-mini"><div class="hist-mini-title">Últimos registros</div>${histHtml}</div>`:''}
+    </div>
+  </div>`;
 }
 
-function toggleExecCard(exId) {
-  const body = document.getElementById('ebody-'+exId);
-  body.classList.toggle('open');
-}
-
-function setTipoCard(exId, t) {
-  ['tubo','fita','ambos'].forEach(x => document.getElementById(`tbtn-${x}-${exId}`).classList.toggle('active', x===t));
-}
+function toggleExecCard(exId) { document.getElementById('ebody-'+exId).classList.toggle('open'); }
+function setTipoCard(exId,t) { ['tubo','fita','ambos'].forEach(x=>document.getElementById(`tbtn-${x}-${exId}`).classList.toggle('active',x===t)); }
 
 function toggleCorCard(exId, el) {
   el.classList.toggle('selected');
-  const selecionadas = [...document.querySelectorAll(`#cg-${exId} .mini-chip.selected`)].map(e=>e.dataset.cor);
-  if (!selecionadas.length) { el.classList.add('selected'); return; }
-  document.getElementById('cl-'+exId).innerHTML = renderCorTagsStr(selecionadas);
+  const sel=[...document.querySelectorAll(`#cg-${exId} .mini-chip.selected`)].map(e=>e.dataset.cor);
+  if(!sel.length){el.classList.add('selected');return;}
+  document.getElementById('cl-'+exId).innerHTML=renderCorTagsStr(sel);
+  // mostra/oculta campo peso cinza
+  const pw=document.getElementById('pw-'+exId);
+  if(pw) pw.classList.toggle('show', sel.includes('Cinza'));
 }
 
-function renderCorTagsStr(cores) {
-  return (cores||[]).map(c=>`<span class="color-tag"><span class="color-tag-dot" style="background:${COR[c]}"></span>${c}</span>`).join('');
-}
+function aplicarSugestao(exId) { document.getElementById('ebody-'+exId).classList.add('open'); }
 
-function aplicarSugestao(exId, nome) {
-  // já está preenchido pelo valor padrão — só abre o card
-  document.getElementById('ebody-'+exId).classList.add('open');
-}
-
-async function registrarExecucao(exId, nome, execucaoIdExistente) {
+async function registrarExecucao(exId, nome, execIdExistente) {
   const series = parseInt(document.getElementById('inp-series-'+exId).value);
   const reps   = parseInt(document.getElementById('inp-reps-'+exId).value);
   const obs    = document.getElementById('inp-obs-'+exId).value.trim();
-  const tipo   = (['tubo','fita','ambos'].find(t=>document.getElementById(`tbtn-${t}-${exId}`).classList.contains('active'))) || 'tubo';
+  const tipo   = ['tubo','fita','ambos'].find(t=>document.getElementById(`tbtn-${t}-${exId}`).classList.contains('active'))||'tubo';
   const cores  = [...document.querySelectorAll(`#cg-${exId} .mini-chip.selected`)].map(e=>e.dataset.cor);
+  const pesoCinzaEl = document.getElementById('inp-peso-'+exId);
+  const pesoCinza = pesoCinzaEl && cores.includes('Cinza') ? (pesoCinzaEl.value||'') : '';
 
-  if (!series||!reps) { toast('⚠️ Informe séries e repetições', true); return; }
-  if (!cores.length) { toast('⚠️ Selecione ao menos uma cor', true); return; }
+  if(!series||!reps){toast('⚠️ Informe séries e repetições',true);return;}
+  if(!cores.length){toast('⚠️ Selecione ao menos uma cor',true);return;}
+  if(cores.includes('Cinza')&&!pesoCinza){toast('⚠️ Informe o peso do elástico cinza',true);return;}
 
-  const payload = {
-    id: execucaoIdExistente || Date.now().toString(),
-    exercicioNome: nome,
-    diaTreino: diaSelecionado,
-    data: fmtShort(dataDia),
-    series, reps, tipo, cores, obs,
-    criadoEm: new Date().toISOString()
+  const payload={
+    id: execIdExistente||Date.now().toString(),
+    exercicioNome:nome, diaTreino:diaSelecionado,
+    data:fmtShort(dataDia), series, reps, tipo, cores, pesoCinza, obs,
+    criadoEm:new Date().toISOString()
   };
 
-  const btn = event.target;
-  btn.disabled=true; btn.textContent='SALVANDO…';
-
+  const btn=event.target; btn.disabled=true; btn.textContent='SALVANDO…';
   try {
-    if (execucaoIdExistente) {
-      await api('updateExecucao', payload);
-      const i = execucoes.findIndex(e=>e.id===execucaoIdExistente);
-      if (i!==-1) execucoes[i] = payload;
+    if(execIdExistente){
+      await api('updateExecucao',payload);
+      const i=execucoes.findIndex(e=>e.id===execIdExistente);
+      if(i!==-1) execucoes[i]=payload;
     } else {
-      await api('saveExecucao', payload);
+      await api('saveExecucao',payload);
       execucoes.push(payload);
     }
-    ls(SK_EXEC, execucoes);
+    lsSet(SK_EXEC,execucoes);
     toast('✅ Execução registrada!');
     renderHoje();
-  } catch(e) { toast('⚠️ Erro ao salvar', true); btn.disabled=false; btn.textContent=execucaoIdExistente?'ATUALIZAR':'REGISTRAR EXECUÇÃO'; }
+  } catch(e){toast('⚠️ Erro ao salvar',true);btn.disabled=false;btn.textContent=execIdExistente?'ATUALIZAR':'REGISTRAR EXECUÇÃO';}
 }
 
-async function excluirExecucao(execId, exId) {
-  if (!confirm('Excluir este registro?')) return;
-  try {
+async function excluirExecucao(execId) {
+  if(!confirm('Excluir este registro?'))return;
+  try{
     await api('deleteExecucao',{id:execId});
-    execucoes = execucoes.filter(e=>e.id!==execId);
-    ls(SK_EXEC, execucoes);
-    toast('🗑 Registro excluído');
-    renderHoje();
-  } catch(e) { toast('⚠️ Erro ao excluir',true); }
+    execucoes=execucoes.filter(e=>e.id!==execId);
+    lsSet(SK_EXEC,execucoes);
+    toast('🗑 Registro excluído'); renderHoje();
+  }catch(e){toast('⚠️ Erro ao excluir',true);}
 }
 
 // ── EXERCÍCIOS (cadastro) ─────────────────────────────────
 function renderExercicios() {
-  const el = document.getElementById('lista-exercicios');
-  if (!exercicios.length) {
-    el.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>Nenhum exercício cadastrado</h3><p>Toque em "+ Novo" para começar</p></div>`;
-    return;
-  }
-  // agrupa por dia
-  const grupos = {};
+  const el=document.getElementById('lista-exercicios');
+  if(!exercicios.length){el.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>Nenhum exercício cadastrado</h3><p>Toque em "+ Novo" para começar</p></div>`;return;}
+  const grupos={};
   exercicios.forEach(e=>{const k=e.diaTreino||'Sem dia';if(!grupos[k])grupos[k]=[];grupos[k].push(e);});
-  el.innerHTML = Object.entries(grupos).map(([dia,items])=>`
+  el.innerHTML=Object.entries(grupos).map(([dia,items])=>`
     <div style="margin-bottom:16px">
       <div style="font-family:'Bebas Neue',cursive;font-size:14px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)">${dia}</div>
       ${items.map(ex=>{
         const dots=(ex.cores||[]).map(c=>`<div class="edot" style="background:${COR[c]||'#888'}"></div>`).join('');
+        const pesoTag=temCinza(ex.cores)&&ex.pesoCinza?`<span style="font-size:11px;color:var(--c-cinza);background:rgba(158,158,158,.1);border-radius:4px;padding:1px 6px">⚖️${ex.pesoCinza}kg</span>`:'';
         return `<div class="ex-item">
           <div class="ex-item-left">
             <div class="ex-item-nome">${ex.nome}</div>
@@ -747,6 +730,7 @@ function renderExercicios() {
               ${ex.grupo?`<span class="badge">${ex.grupo}</span>`:''}
               <span class="badge badge-g">${ex.series}x${ex.reps}</span>
               <div class="dots-row" style="margin:0">${dots}</div>
+              ${pesoTag}
             </div>
           </div>
           <div class="ex-item-actions">
@@ -765,31 +749,31 @@ function abrirModalCadastro() {
   document.getElementById('modal-ex-title').textContent='Novo Exercício';
   document.getElementById('ex-nome').readOnly=false;
   document.getElementById('ex-nome-lock-hint').style.display='none';
-  ['ex-dia','ex-nome','ex-grupo','ex-series','ex-reps','ex-obs'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.value='';
-  });
+  ['ex-dia','ex-nome','ex-series','ex-reps','ex-obs','ex-peso-cinza'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('ex-grupo').value='';
   setTipoEx('tubo');
   document.querySelectorAll('#ex-color-grid .color-chip').forEach(el=>el.classList.toggle('selected',el.dataset.cor==='Amarelo'));
   renderCorTagsEx();
+  document.getElementById('ex-peso-wrap').classList.remove('show');
   document.getElementById('modal-ex').classList.add('open');
 }
 
 function editarExercicio(id) {
-  const ex=exercicios.find(e=>e.id===id); if(!ex) return;
+  const ex=exercicios.find(e=>e.id===id);if(!ex)return;
   editExId=id; tipoEx=ex.tipo||'tubo'; coresEx=[...(ex.cores||['Amarelo'])];
   document.getElementById('modal-ex-title').textContent='Editar Exercício';
-  document.getElementById('ex-nome').value=ex.nome;
-  document.getElementById('ex-nome').readOnly=true;
+  document.getElementById('ex-nome').value=ex.nome; document.getElementById('ex-nome').readOnly=true;
   document.getElementById('ex-nome-lock-hint').style.display='block';
   document.getElementById('ex-dia').value=ex.diaTreino||'';
   document.getElementById('ex-grupo').value=ex.grupo||'';
   document.getElementById('ex-series').value=ex.series||'';
   document.getElementById('ex-reps').value=ex.reps||'';
   document.getElementById('ex-obs').value=ex.obs||'';
+  document.getElementById('ex-peso-cinza').value=ex.pesoCinza||'';
   setTipoEx(tipoEx);
   document.querySelectorAll('#ex-color-grid .color-chip').forEach(el=>el.classList.toggle('selected',coresEx.includes(el.dataset.cor)));
   renderCorTagsEx();
+  document.getElementById('ex-peso-wrap').classList.toggle('show', temCinza(coresEx));
   document.getElementById('modal-ex').classList.add('open');
 }
 
@@ -805,6 +789,9 @@ function toggleCorEx(el) {
   if(i===-1){coresEx.push(c);el.classList.add('selected');}
   else{if(coresEx.length===1){toast('⚠️ Mínimo uma cor',true);return;}coresEx.splice(i,1);el.classList.remove('selected');}
   renderCorTagsEx();
+  // mostra/oculta campo peso cinza
+  document.getElementById('ex-peso-wrap').classList.toggle('show', temCinza(coresEx));
+  if(!temCinza(coresEx)) document.getElementById('ex-peso-cinza').value='';
 }
 
 function renderCorTagsEx() {
@@ -820,52 +807,47 @@ async function salvarExercicio() {
   const series=parseInt(document.getElementById('ex-series').value);
   const reps=parseInt(document.getElementById('ex-reps').value);
   const obs=document.getElementById('ex-obs').value.trim();
+  const pesoCinza=temCinza(coresEx)?document.getElementById('ex-peso-cinza').value:'';
 
   if(!diaTreino){toast('⚠️ Informe o dia de treino',true);return;}
   if(!nome){toast('⚠️ Informe o nome',true);return;}
   if(!series){toast('⚠️ Informe as séries',true);return;}
   if(!reps){toast('⚠️ Informe as reps',true);return;}
-  if(!coresEx.length){toast('⚠️ Selecione ao menos uma cor',true);return;}
 
   const btn=document.getElementById('btn-salvar-ex');
-  btn.disabled=true;btn.textContent='SALVANDO…';
-
+  btn.disabled=true; btn.textContent='SALVANDO…';
   try {
-    if (editExId) {
-      const payload={id:editExId,diaTreino,grupo,series,reps,tipo:tipoEx,cores:coresEx,obs};
+    if(editExId){
+      const payload={id:editExId,diaTreino,grupo,series,reps,tipo:tipoEx,cores:coresEx,pesoCinza,obs};
       await api('updateExercicio',payload);
       const i=exercicios.findIndex(e=>e.id===editExId);
       if(i!==-1) Object.assign(exercicios[i],payload);
     } else {
-      const ex={id:Date.now().toString(),nome,diaTreino,grupo,series,reps,tipo:tipoEx,cores:coresEx,obs,criadoEm:new Date().toISOString()};
+      const ex={id:Date.now().toString(),nome,diaTreino,grupo,series,reps,tipo:tipoEx,cores:coresEx,pesoCinza,obs,criadoEm:new Date().toISOString()};
       await api('saveExercicio',ex);
       exercicios.push(ex);
     }
-    ls(SK_EX,exercicios);
-    // atualiza dias conhecidos
-    const dExec=execucoes.map(e=>e.diaTreino).filter(Boolean);
-    diasConhecidos=[...new Set([...exercicios.map(e=>e.diaTreino).filter(Boolean),...dExec])];
-    ls(SK_DIAS,diasConhecidos);
+    lsSet(SK_EX,exercicios);
+    diasConhecidos=[...new Set([...exercicios.map(e=>e.diaTreino),...execucoes.map(e=>e.diaTreino)].filter(Boolean))];
+    lsSet(SK_DIAS,diasConhecidos);
     fecharModalEx(); renderExercicios(); renderHoje();
     toast(editExId?'✅ Exercício atualizado!':'✅ Exercício cadastrado!');
-  } catch(e){toast('⚠️ Erro ao salvar',true);}
-
-  btn.disabled=false;btn.textContent='SALVAR EXERCÍCIO';
+  }catch(e){toast('⚠️ Erro ao salvar',true);}
+  btn.disabled=false; btn.textContent='SALVAR EXERCÍCIO';
 }
 
 async function excluirExercicio(id) {
-  if(!confirm('Excluir este exercício? Os registros de execução não serão apagados.')) return;
-  try {
+  if(!confirm('Excluir este exercício? Os registros de execução não serão apagados.'))return;
+  try{
     await api('deleteExercicio',{id});
     exercicios=exercicios.filter(e=>e.id!==id);
-    ls(SK_EX,exercicios);
-    renderExercicios(); renderHoje();
+    lsSet(SK_EX,exercicios); renderExercicios(); renderHoje();
     toast('🗑 Exercício excluído');
-  } catch(e){toast('⚠️ Erro ao excluir',true);}
+  }catch(e){toast('⚠️ Erro ao excluir',true);}
 }
 
 // ── AUTOCOMPLETE ──────────────────────────────────────────
-function acDia(inputId, listId) {
+function acDia(inputId,listId) {
   const val=document.getElementById(inputId).value;
   const sug=val?diasConhecidos.filter(d=>d.toLowerCase().includes(val.toLowerCase())):diasConhecidos;
   const list=document.getElementById(listId);
@@ -910,8 +892,8 @@ function renderProgresso() {
     const dias=[...new Set(sorted.map(e=>e.diaTreino).filter(Boolean))];
     let trend='';
     if(prev){
-      const cl=(+last.series)*(+last.reps)*(last.cores||[]).length;
-      const pl=(+prev.series)*(+prev.reps)*(prev.cores||[]).length;
+      const cl=(+last.series)*(+last.reps)*(last.cores||[]).length+(+last.pesoCinza||0);
+      const pl=(+prev.series)*(+prev.reps)*(prev.cores||[]).length+(+prev.pesoCinza||0);
       trend=cl>pl?'<span class="trend trend-up">▲ Progresso</span>':cl===pl?'<span class="trend trend-same">= Manteve</span>':'<span class="trend trend-down">▼ Reduziu</span>';
     }
     html+=`<div class="prog-card">
@@ -921,12 +903,13 @@ function renderProgresso() {
       ${sorted.slice().reverse().slice(0,10).map(e=>{
         const dots=(e.cores||[]).map(c=>`<div class="hdot" style="background:${COR[c]||'#888'}"></div>`).join('');
         const vol=(+e.series)*(+e.reps)*(e.cores||[]).length;
+        const pesoTag=e.pesoCinza?`<span class="h-peso">⚖️${e.pesoCinza}kg</span>`:'';
         return `<div class="h-row">
           <span class="h-date">${e.data}</span>
           ${e.diaTreino?`<span class="h-dia">${e.diaTreino}</span>`:''}
           <span class="badge">${e.series}x${e.reps}</span>
           <div class="hist-dots">${dots}</div>
-          <span style="font-size:11px;color:var(--muted)">${(e.cores||[]).join('+')||'-'}</span>
+          ${pesoTag}
           <span class="h-vol">Vol:${vol}</span>
         </div>`;
       }).join('')}
@@ -935,7 +918,11 @@ function renderProgresso() {
   document.getElementById('lista-prog').innerHTML=html;
 }
 
-// ── TOAST ─────────────────────────────────────────────────
+// ── HELPERS UI ────────────────────────────────────────────
+function renderCorTagsStr(cores) {
+  return (cores||[]).map(c=>`<span class="color-tag"><span class="color-tag-dot" style="background:${COR[c]}"></span>${c}</span>`).join('');
+}
+
 let tTimer;
 function toast(msg,err=false){
   const el=document.getElementById('toast');
@@ -943,7 +930,6 @@ function toast(msg,err=false){
   clearTimeout(tTimer);tTimer=setTimeout(()=>el.classList.remove('show'),2500);
 }
 
-// fecha modais clicando fora
 ['modal-ex','modal-novo-dia'].forEach(id=>{
   document.getElementById(id).addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
 });
